@@ -1,0 +1,528 @@
+/* ══════════════════════════════════════════
+   competencias.css — estilos exclusivos de competencias.html
+   ══════════════════════════════════════════ */
+
+.nav-active {
+  color: var(--blue) !important;
+}
+
+.nav-active::after {
+  width: 100% !important;
+}
+
+/* ══════════════════════════════════════════
+   HERO
+   ══════════════════════════════════════════ */
+.comp-hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 56px;
+  padding: 120px 6vw 80px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dk) 100%);
+}
+
+.comp-hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(255,255,255,.08), transparent 30%),
+    radial-gradient(circle at 85% 75%, rgba(203,161,53,.12), transparent 28%),
+    url("data:image/svg+xml,%3Csvg width='70' height='70' viewBox='0 0 70 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.035'%3E%3Cpath d='M35 0l4 12h12l-9.5 7 3.6 11.4L35 23.6l-10.1 6.8L28.5 19 19 12h12zM8 44l2.5 7.2H18l-5.8 4.2 2.2 7L8 58l-6.4 4.4 2.2-7L-2 51.2h7.5zM57 42l2.5 7.2H67l-5.8 4.2 2.2 7L57 56l-6.4 4.4 2.2-7-5.8-4.2h7.5z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.comp-hero-content,
+.comp-hero-badges {
+  position: relative;
+  z-index: 2;
+}
+
+.comp-hero-title {
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(2.4rem, 4.6vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.08;
+  color: var(--white);
+  margin: 16px 0 20px;
+}
+
+.accent-gold {
+  color: var(--gold);
+}
+
+.comp-hero-desc {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,.78);
+  max-width: 540px;
+  margin-bottom: 34px;
+}
+
+.comp-hero-badges {
+  display: grid;
+  gap: 18px;
+}
+
+.comp-badge {
+  background: rgba(255,255,255,.10);
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: var(--radius-md);
+  padding: 24px 22px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.16);
+  transition: transform var(--transition), border-color var(--transition);
+}
+
+.comp-badge:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,255,255,.26);
+}
+
+.comp-badge-num {
+  display: block;
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.comp-badge-lbl {
+  display: block;
+  font-size: .9rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,.84);
+}
+
+/* ══════════════════════════════════════════
+   INTRODUCCIÓN
+   ══════════════════════════════════════════ */
+.comp-intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.comp-areas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.comp-area-chip {
+  --chip-color: var(--blue);
+  background: var(--white);
+  border: 1px solid rgba(48,102,190,.08);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.comp-area-chip:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.comp-area-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  background: color-mix(in srgb, var(--chip-color) 12%, white);
+  color: var(--chip-color);
+}
+
+.comp-area-chip span:last-child {
+  font-size: .92rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ══════════════════════════════════════════
+   BLOQUES DE COMPETENCIAS
+   ══════════════════════════════════════════ */
+.comp-block {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 34px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(48,102,190,.07);
+  margin-bottom: 28px;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.comp-block:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.comp-block-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.comp-block-num {
+  width: 62px;
+  height: 62px;
+  border-radius: 18px;
+  background: rgba(48,102,190,.10);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+}
+
+.comp-block-area {
+  font-size: .78rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--sage);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.comp-block-title {
+  font-family: "Poppins", sans-serif;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  line-height: 1.25;
+  color: var(--blue);
+}
+
+.comp-block-body > p {
+  font-size: .98rem;
+  line-height: 1.85;
+  color: #444;
+}
+
+.comp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.comp-tag {
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(48,102,190,.08);
+  color: var(--blue);
+  font-size: .78rem;
+  font-weight: 600;
+}
+
+.comp-evidencias {
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(48,102,190,.08);
+}
+
+.comp-ev-title {
+  font-family: "Poppins", sans-serif;
+  font-size: .96rem;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+.comp-ev-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.comp-ev-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(48,102,190,.04);
+  border: 1px solid rgba(48,102,190,.08);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.comp-ev-item:hover {
+  transform: translateY(-3px);
+  background: rgba(48,102,190,.06);
+  box-shadow: var(--shadow-sm);
+}
+
+.comp-ev-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.comp-ev-name {
+  display: block;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+.comp-ev-tipo {
+  display: block;
+  font-size: .78rem;
+  color: #666;
+  margin-top: 2px;
+}
+
+/* ══════════════════════════════════════════
+   NIVELES DE DOMINIO
+   ══════════════════════════════════════════ */
+.comp-skills-grid {
+  max-width: 920px;
+  margin: 0 auto;
+  display: grid;
+  gap: 18px;
+}
+
+.comp-skill {
+  background: var(--white);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(48,102,190,.07);
+}
+
+.comp-skill-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.comp-skill-header span:first-child {
+  font-size: .92rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.comp-skill-pct {
+  font-size: .88rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+.comp-skill-bar {
+  width: 100%;
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(48,102,190,.08);
+  overflow: hidden;
+}
+
+.comp-skill-fill {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color, var(--blue));
+  transition: width 1.2s ease;
+}
+
+.comp-skill-fill.animate {
+  width: var(--pct);
+}
+
+/* ══════════════════════════════════════════
+   REUTILIZADO: NAVEGACIÓN ENTRE PÁGINAS
+   ══════════════════════════════════════════ */
+.id-page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  padding: 0;
+  border-top: 1px solid rgba(48,102,190,.1);
+}
+
+.id-pnav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 6vw;
+  transition: background var(--transition);
+  gap: 4px;
+  text-decoration: none;
+}
+
+.id-pnav-btn.prev {
+  border-right: 1px solid rgba(48,102,190,.1);
+  align-items: flex-start;
+}
+
+.id-pnav-btn.next {
+  align-items: flex-end;
+  text-align: right;
+}
+
+.id-pnav-btn:hover {
+  background: rgba(48,102,190,.04);
+}
+
+.id-pnav-dir {
+  font-size: .78rem;
+  color: var(--sage);
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.id-pnav-title {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .comp-hero {
+    grid-template-columns: 1fr;
+    gap: 38px;
+    text-align: center;
+  }
+
+  .comp-hero-desc {
+    margin-inline: auto;
+  }
+
+  .comp-hero-badges {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: stretch;
+  }
+
+  .comp-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+}
+
+@media (max-width: 768px) {
+  .comp-hero {
+    padding-top: 110px;
+  }
+
+  .comp-hero-badges {
+    grid-template-columns: 1fr;
+  }
+
+  .comp-areas,
+  .comp-ev-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comp-block {
+    padding: 26px 22px;
+  }
+
+  .comp-block-header {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 640px) {
+  .comp-block-header {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .comp-block-num {
+    width: 54px;
+    height: 54px;
+    border-radius: 16px;
+  }
+
+  .comp-skill-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .id-page-nav {
+    flex-direction: column;
+  }
+
+  .id-pnav-btn.prev {
+    border-right: none;
+    border-bottom: 1px solid rgba(48,102,190,.1);
+  }
+
+  .id-pnav-btn.next {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+/* Nuevo bloque: Competencias de cosmovisión */
+.comp-cosmovision-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.comp-cosmo-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  padding: 28px 22px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(48,102,190,.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.comp-cosmo-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.comp-cosmo-icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.comp-cosmo-card h3 {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.1rem;
+  color: var(--blue);
+  margin-bottom: 10px;
+}
+
+.comp-cosmo-card p {
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .comp-cosmovision-grid {
+    grid-template-columns: 1fr;
+  }
+}

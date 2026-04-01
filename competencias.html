@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Competencias del Perfil de Egreso | Caleb Josué Trujillo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+/* ══ RESET + VARIABLES ══ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#3066BE;--blue-dk:#1D4A9E;--gold:#CBA135;--sage:#928C6F;
+  --bg:#E8E9F3;--bg-light:#F5F5F5;--text:#1A1A1A;--white:#FFFFFF;
+  --shadow-sm:0 2px 12px rgba(48,102,190,0.07);
+  --shadow-md:0 8px 32px rgba(48,102,190,0.12);
+  --shadow-lg:0 16px 48px rgba(48,102,190,0.16);
+  --radius-sm:12px;--radius-md:20px;--radius-lg:28px;
+  --transition:0.25s ease;--container-pad:6vw;
+}
+html{scroll-behavior:smooth}
+body{font-family:"Figtree",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+
+/* ══ NAVBAR ══ */
+#navbar{position:fixed;inset:0 0 auto 0;width:100%;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px var(--container-pad);background:rgba(232,233,243,0.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(48,102,190,0.1);transition:box-shadow var(--transition)}
+#navbar.scrolled{box-shadow:0 4px 32px rgba(48,102,190,0.1)}
+.nav-logo{font-family:"Poppins",sans-serif;font-weight:700;font-size:1.2rem;color:var(--blue);flex-shrink:0}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{position:relative;font-weight:500;font-size:0.88rem;color:var(--text);transition:color 0.2s;padding-bottom:2px}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);transition:width 0.25s ease}
+.nav-links a:hover::after,.nav-links a.nav-active::after{width:100%}
+.nav-links a.nav-active{color:var(--blue);font-weight:600}
+.nav-links a:hover{color:var(--blue)}
+.nav-cta{display:inline-flex;align-items:center;background:var(--blue);color:var(--white);padding:9px 22px;border-radius:999px;font-size:0.88rem;font-weight:500;transition:background var(--transition),transform var(--transition);flex-shrink:0}
+.nav-cta:hover{background:var(--gold);transform:translateY(-1px)}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.nav-burger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s ease}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-links.open{display:flex;flex-direction:column;align-items:flex-start;gap:1.4rem;position:fixed;top:72px;left:0;width:100%;padding:24px var(--container-pad) 32px;background:rgba(232,233,243,0.98);backdrop-filter:blur(14px);border-bottom:1px solid rgba(48,102,190,0.1);box-shadow:0 8px 32px rgba(48,102,190,0.08);z-index:999}
+.nav-links.open a.nav-active{border-left:3px solid var(--gold);padding-left:12px}
+
+/* ══ BUTTONS ══ */
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;cursor:pointer;background:var(--blue);color:var(--white);padding:13px 30px;border:none;font-size:0.95rem;font-weight:500;box-shadow:0 6px 24px rgba(48,102,190,0.25);transition:all var(--transition)}
+.btn-primary:hover{background:var(--blue-dk);transform:translateY(-2px);box-shadow:0 10px 32px rgba(48,102,190,0.35)}
+.btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;cursor:pointer;background:transparent;color:var(--text);padding:12px 28px;border:1.5px solid var(--sage);font-size:0.95rem;font-weight:500;transition:all var(--transition)}
+.btn-secondary:hover{color:var(--blue);border-color:var(--blue);transform:translateY(-2px)}
+
+/* ══ REVEAL ══ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ══ PAGE HERO ══ */
+.page-hero{padding:140px var(--container-pad) 80px;background:var(--bg);position:relative;overflow:hidden}
+.page-hero::before{content:"";position:absolute;right:-80px;top:-80px;width:500px;height:500px;background:linear-gradient(135deg,rgba(48,102,190,0.07),rgba(203,161,53,0.05));border-radius:50%;pointer-events:none}
+.breadcrumb{display:inline-flex;align-items:center;gap:8px;font-size:0.78rem;color:var(--sage);margin-bottom:20px}
+.breadcrumb a:hover{color:var(--blue)}
+.breadcrumb span{color:var(--gold)}
+.page-hero-tag{display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;padding:6px 16px;background:rgba(48,102,190,0.08);border:1px solid rgba(48,102,190,0.18);border-radius:999px;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue)}
+.page-hero-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.page-hero h1{font-family:"Poppins",sans-serif;font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:700;line-height:1.1;margin-bottom:16px}
+.page-hero h1 span{color:var(--blue)}
+.page-hero-desc{max-width:640px;font-size:1rem;line-height:1.85;color:#555}
+
+/* ══ SECCIÓN BASE ══ */
+.section{padding:80px var(--container-pad)}
+.bg-light{background:var(--bg-light)}
+.bg-base{background:var(--bg)}
+.section-tag{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;font-size:0.74rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold)}
+.section-tag::before{content:"";width:28px;height:2px;background:var(--gold);flex-shrink:0}
+.section-title{font-family:"Poppins",sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;line-height:1.2;margin-bottom:16px}
+
+/* ══ ÍNDICE DE COMPETENCIAS ══ */
+.comp-index{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.comp-pill{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:999px;font-size:0.8rem;font-weight:500;background:var(--white);border:1.5px solid rgba(48,102,190,0.15);color:var(--text);transition:all var(--transition);cursor:pointer}
+.comp-pill:hover,.comp-pill.active{background:var(--blue);color:var(--white);border-color:var(--blue)}
+.comp-pill .pill-num{font-weight:700;color:var(--gold)}
+.comp-pill:hover .pill-num,.comp-pill.active .pill-num{color:rgba(255,255,255,0.7)}
+
+/* ══ SEPARADOR DE BLOQUE ══ */
+.block-divider{display:flex;align-items:center;gap:16px;margin-bottom:40px}
+.block-divider-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;border-radius:999px;font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;white-space:nowrap}
+.badge-blue{background:var(--blue);color:var(--white)}
+.badge-gold{background:var(--gold);color:var(--white)}
+.badge-sage{background:var(--sage);color:var(--white)}
+.block-divider-line{flex:1;height:1px;background:rgba(48,102,190,0.12)}
+
+/* ══ COMPETENCIA CARD (bloque principal) ══ */
+.comp-block{background:var(--white);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-sm);margin-bottom:32px;transition:box-shadow var(--transition)}
+.comp-block:hover{box-shadow:var(--shadow-md)}
+.comp-block-header{padding:28px 36px 20px;border-bottom:1px solid rgba(48,102,190,0.07)}
+.comp-block-num{font-family:"Poppins",sans-serif;font-size:0.72rem;font-weight:700;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:6px}
+.comp-block-header h2{font-family:"Poppins",sans-serif;font-size:clamp(1.1rem,2vw,1.4rem);font-weight:700;color:var(--blue);line-height:1.25}
+.comp-block-body{padding:32px 36px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+
+/* Columna izquierda: descripción + reflexión + proyección */
+.comp-desc p{font-size:0.95rem;line-height:1.85;color:#444;margin-bottom:14px}
+.comp-meta{margin-top:24px;display:flex;flex-direction:column;gap:16px}
+.comp-meta-item{background:rgba(48,102,190,0.04);border-radius:var(--radius-sm);padding:16px 18px;border-left:3px solid var(--blue)}
+.comp-meta-item.gold{border-left-color:var(--gold);background:rgba(203,161,53,0.05)}
+.comp-meta-item.sage{border-left-color:var(--sage);background:rgba(146,140,111,0.05)}
+.comp-meta-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--sage);margin-bottom:6px}
+.comp-meta-item.gold .comp-meta-label{color:var(--gold)}
+.comp-meta-item p{font-size:0.88rem;line-height:1.75;color:#555;margin:0}
+
+/* Columna derecha: fotos evidencias */
+.comp-evidencias{}
+.comp-evidencias-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin-bottom:14px}
+.comp-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.comp-photo{aspect-ratio:1;border-radius:var(--radius-sm);overflow:hidden;background:linear-gradient(135deg,rgba(48,102,190,0.08),rgba(203,161,53,0.06));cursor:pointer;transition:transform var(--transition),box-shadow var(--transition)}
+.comp-photo:hover{transform:scale(1.03);box-shadow:var(--shadow-md)}
+.comp-photo img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius-sm)}
+.comp-photo-desc{background:rgba(48,102,190,0.04);border-radius:var(--radius-sm);padding:14px;font-size:0.82rem;line-height:1.7;color:#666;border:1px dashed rgba(48,102,190,0.12)}
+.comp-photo-desc p{margin:0}
+
+/* Competencia 5: área de archivo de investigación */
+.file-area{background:rgba(48,102,190,0.04);border:1.5px dashed rgba(48,102,190,0.2);border-radius:var(--radius-md);padding:20px;text-align:center;margin-top:14px}
+.file-area-icon{font-size:2rem;margin-bottom:8px}
+.file-area p{font-size:0.82rem;color:#777;margin-bottom:12px}
+
+/* ══ BLOQUE INTEGRACIÓN ══ */
+.integ-block{background:linear-gradient(135deg,rgba(146,140,111,0.08),rgba(48,102,190,0.04));border-radius:var(--radius-lg);padding:40px;border:1px solid rgba(146,140,111,0.2);margin-bottom:32px}
+.integ-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.integ-chips{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.integ-chip{display:flex;align-items:center;gap:10px;background:var(--white);border-radius:var(--radius-sm);padding:12px 14px;box-shadow:var(--shadow-sm);font-size:0.84rem;font-weight:500;transition:transform var(--transition)}
+.integ-chip:hover{transform:translateY(-2px)}
+.integ-photo{aspect-ratio:4/3;border-radius:var(--radius-md);overflow:hidden;background:linear-gradient(135deg,rgba(146,140,111,0.12),rgba(48,102,190,0.06))}
+.integ-photo img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius-md)}
+
+/* ══ LIGHTBOX ══ */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:2000;justify-content:center;align-items:center;flex-direction:column;padding:20px}
+.lightbox.open{display:flex}
+.lightbox-img{max-width:90%;max-height:78vh;border-radius:var(--radius-md);object-fit:contain}
+.lightbox-caption{margin-top:16px;color:var(--white);font-size:0.9rem;text-align:center;background:rgba(255,255,255,0.08);padding:8px 20px;border-radius:999px}
+.lightbox-close{position:absolute;top:20px;right:28px;color:var(--white);font-size:2rem;cursor:pointer;line-height:1;opacity:0.7;transition:opacity var(--transition)}
+.lightbox-close:hover{opacity:1}
+
+/* ══ NAV SECCIONES ══ */
+.sec-nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-top:56px;padding-top:40px;border-top:1px solid rgba(48,102,190,0.1)}
+.sec-nav-link{display:inline-flex;align-items:center;gap:8px;font-size:0.88rem;font-weight:600;color:var(--blue);transition:gap var(--transition)}
+.sec-nav-link:hover{gap:12px}
+
+/* ══ FOOTER ══ */
+#footer{background:#101521;color:rgba(255,255,255,0.84);padding:42px var(--container-pad) 18px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.footer-logo{font-family:"Poppins",sans-serif;font-size:1.2rem;font-weight:700;color:var(--white)}
+.footer-logo span{color:var(--gold)}
+.footer-nav{display:flex;flex-wrap:wrap;gap:18px}
+.footer-nav a{font-size:0.88rem;color:rgba(255,255,255,0.76);transition:color var(--transition)}
+.footer-nav a:hover{color:var(--gold)}
+.footer-soc{display:flex;gap:10px}
+.fsoc{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.08);transition:background var(--transition),transform var(--transition)}
+.fsoc:hover{background:rgba(255,255,255,0.16);transform:translateY(-2px)}
+.footer-bottom{margin-top:24px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.1);text-align:center;font-size:0.82rem;color:rgba(255,255,255,0.58)}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:900px){
+  #navbar{padding:16px var(--container-pad)}
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+  .nav-cta{display:none}
+  .comp-block-body,.integ-grid{grid-template-columns:1fr}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:640px){
+  .section{padding:60px var(--container-pad)}
+  .page-hero{padding:120px var(--container-pad) 56px}
+  .comp-block-header,.comp-block-body{padding:22px 20px}
+  .comp-photos{grid-template-columns:repeat(3,1fr)}
+  .integ-chips{grid-template-columns:1fr}
+  .sec-nav{flex-direction:column;align-items:flex-start}
+  .integ-block{padding:24px}
+}
+  </style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Caleb<span>.</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="identidad.html">Identidad</a></li>
+    <li><a href="competencias.html" class="nav-active">Competencias</a></li>
+    <li><a href="practicas.html">Prácticas</a></li>
+    <li><a href="trayectoria.html">Trayectoria</a></li>
+    <li><a href="galeria.html">Galería</a></li>
+  </ul>
+  <a href="index.html#contacto" class="nav-cta">Contáctame</a>
+  <button class="nav-burger" id="burger" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══ PAGE HERO ══ -->
+<header class="page-hero">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="breadcrumb reveal">
+      <a href="index.html">Inicio</a>
+      <span>/</span>
+      <span>Sección 2</span>
+    </div>
+    <div class="page-hero-tag reveal">Sección 2 de 5</div>
+    <h1 class="reveal">Competencias del<br><span>perfil de egreso</span></h1>
+    <p class="page-hero-desc reveal">
+      Evidencias auténticas del logro de competencias en cosmovisión, 
+      generación y aplicación del conocimiento, e integración. 
+      Cada competencia incluye descripción, evidencias, reflexión y proyección profesional.
+    </p>
+    <!-- Índice rápido -->
+    <div class="comp-index reveal">
+      <a href="#cosmovision" class="comp-pill"><span class="pill-num">I</span> Cosmovisión</a>
+      <a href="#ensenanza" class="comp-pill"><span class="pill-num">II</span> Enseñanza</a>
+      <a href="#ejecucion" class="comp-pill"><span class="pill-num">III</span> Ejecución</a>
+      <a href="#arreglos" class="comp-pill"><span class="pill-num">IV</span> Arreglos</a>
+      <a href="#liderazgo" class="comp-pill"><span class="pill-num">V</span> Liderazgo</a>
+      <a href="#investigacion" class="comp-pill"><span class="pill-num">VI</span> Investigación</a>
+      <a href="#integracion" class="comp-pill"><span class="pill-num">VII</span> Integración</a>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════
+     BLOQUE A: COSMOVISIÓN
+══════════════════════════════ -->
+<section id="cosmovision" class="section bg-light">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div class="block-divider reveal">
+      <div class="block-divider-badge badge-blue">✝️ &nbsp;Competencias de Cosmovisión</div>
+      <div class="block-divider-line"></div>
+    </div>
+
+    <!-- Tarjeta cosmovisión (sin fotos — es de principios) -->
+    <div class="comp-block reveal">
+      <div class="comp-block-header">
+        <div class="comp-block-num">Competencia I</div>
+        <h2>Tomar decisiones basadas en los principios de la Santa Biblia</h2>
+      </div>
+      <div style="padding:32px 36px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;">
+
+          <div style="background:rgba(48,102,190,0.04);border-radius:var(--radius-md);padding:24px;border-top:3px solid var(--blue);">
+            <div style="font-size:1.8rem;margin-bottom:12px;">🎯</div>
+            <h3 style="font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:700;color:var(--blue);margin-bottom:10px;">Proyección moral y misional</h3>
+            <p style="font-size:0.86rem;line-height:1.75;color:#555;">
+              Proyecto una vida profesional, personal y familiar en el marco de un compromiso 
+              moral y misional, tomando decisiones coherentes con mis convicciones.
+            </p>
+          </div>
+
+          <div style="background:rgba(203,161,53,0.06);border-radius:var(--radius-md);padding:24px;border-top:3px solid var(--gold);">
+            <div style="font-size:1.8rem;margin-bottom:12px;">⚖️</div>
+            <h3 style="font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:700;color:var(--gold);margin-bottom:10px;">Vida equilibrada e íntegra</h3>
+            <p style="font-size:0.86rem;line-height:1.75;color:#555;">
+              Decido vivir una vida equilibrada optimizando el tiempo, las finanzas, las habilidades 
+              y la salud, con un gusto sano por la recreación y las manifestaciones artísticas.
+            </p>
+          </div>
+
+          <div style="background:rgba(146,140,111,0.07);border-radius:var(--radius-md);padding:24px;border-top:3px solid var(--sage);">
+            <div style="font-size:1.8rem;margin-bottom:12px;">🎵</div>
+            <h3 style="font-family:'Poppins',sans-serif;font-size:0.95rem;font-weight:700;color:var(--sage);margin-bottom:10px;">Criterio musical fundamentado</h3>
+            <p style="font-size:0.86rem;line-height:1.75;color:#555;">
+              Busco ejercer un firme criterio basado en los fundamentos bíblicos respecto 
+              a la música que selecciono, escucho, produzco o ejecuto.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Experiencia misional -->
+        <div style="margin-top:28px;background:linear-gradient(135deg,var(--blue),var(--blue-dk));border-radius:var(--radius-md);padding:28px 32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;">
+          <div>
+            <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Misión Internacional</p>
+            <p style="font-size:0.88rem;color:var(--white);font-weight:600;">✈️ Trinidad & Tobago</p>
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.65);margin-top:2px;">Entrenamiento en cosmovisión islámica</p>
+          </div>
+          <div>
+            <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Servicio</p>
+            <p style="font-size:0.88rem;color:var(--white);font-weight:600;">🌍 Egipto</p>
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.65);margin-top:2px;">Nile Union Academy — proyecto de servicio</p>
+          </div>
+          <div>
+            <p style="font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:8px;">Alcance</p>
+            <p style="font-size:0.88rem;color:var(--white);font-weight:600;">🕌 Marruecos</p>
+            <p style="font-size:0.8rem;color:rgba(255,255,255,0.65);margin-top:2px;">Alcance médico y compromiso evangélico relacional</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     BLOQUE B: GENERACIÓN Y APLICACIÓN DEL CONOCIMIENTO
+══════════════════════════════ -->
+<section class="section bg-base">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div class="block-divider reveal">
+      <div class="block-divider-badge badge-gold">💡 &nbsp;Generación y Aplicación del Conocimiento</div>
+      <div class="block-divider-line"></div>
+    </div>
+
+    <!-- ── COMPETENCIA II: ENSEÑANZA ── -->
+    <div id="ensenanza" class="comp-block reveal">
+      <div class="comp-block-header">
+        <div class="comp-block-num">Competencia II</div>
+        <h2>Enseñar música de calidad en diferentes contextos utilizando metodologías y herramientas tecnológicas apropiadas</h2>
+      </div>
+      <div class="comp-block-body">
+        <div class="comp-desc">
+          <p>He sido maestro de piano, enseñado en coros de personas sin formación musical previa 
+          y dado clases de teoría musical y solfeo desde preescolar hasta preparatoria.</p>
+          <p>Cada contexto demandó adaptaciones metodológicas distintas: desde el uso de narrativa 
+          y color con los más pequeños, hasta el trabajo técnico riguroso con los más avanzados.</p>
+          <div class="comp-meta">
+            <div class="comp-meta-item">
+              <div class="comp-meta-label">🔍 Reflexión profesional</div>
+              <p>El acompañamiento del desarrollo del niño, el control de grupo y el 
+              <em>storytelling</em> como recurso pedagógico han sido mis grandes aprendizajes. 
+              Aprendí que enseñar bien requiere tanto dominio del contenido como sensibilidad humana.</p>
+            </div>
+            <div class="comp-meta-item gold">
+              <div class="comp-meta-label">🚀 Proyección</div>
+              <p>Seré docente comprometido con la formación continua, aplicando metodologías 
+              activas e innovadoras adaptadas al contexto de cada grupo.</p>
+            </div>
+          </div>
+        </div>
+        <div class="comp-evidencias">
+          <div class="comp-evidencias-label">Evidencias fotográficas</div>
+          <div class="comp-photos">
+            <div class="comp-photo" onclick="openLightbox('assets/img/caleb42.jpg','Clase de solfeo y teoría musical')">
+              <img src="assets/img/caleb42.jpg" alt="Clase de solfeo y teoría musical">
+            </div>
+            <div class="comp-photo" onclick="openLightbox('assets/img/caleb43.jpg','Enseñanza de piano')">
+              <img src="assets/img/caleb43.jpg" alt="Enseñanza de piano">
+            </div>
+            <div class="comp-photo" onclick="openLightbox('assets/img/caleb44.jpg','Coro escolar')">
+              <img src="assets/img/caleb44.jpg" alt="Coro escolar">
+            </div>
+          </div>
+          <div class="comp-photo-desc">
+            <p>Espacio para describir el contexto de cada evidencia: fecha, institución, 
+            nivel educativo y actividad específica que documenta la competencia.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── COMPETENCIA III: EJECUCIÓN ── -->
+    <div id="ejecucion" class="comp-block reveal">
+      <div class="comp-block-header">
+        <div class="comp-block-num">Competencia III</div>
+        <h2>Ejecutar obras musicales de manera individual o en conjuntos aplicando parámetros de la musicología y la interpretación artística</h2>
+      </div>
+      <div class="comp-block-body">
+        <div class="comp-desc">
+          <p>Toco el piano y disfruto de los instrumentos de aliento madera como el saxofón 
+          y el clarinete. Mi formación abarca tanto la interpretación solista como la participación 
+          en conjuntos instrumentales y vocales.</p>
+          <p>He tenido la oportunidad de acompañar coros, participar en ensambles de cámara 
+          y actuar como pianista funcional en contextos eclesiásticos y educativos.</p>
+          <div class="comp-meta">
+            <div class="comp-meta-item">
+              <div class="comp-meta-label">🔍 Reflexión profesional</div>
+              <p>Soy un pianista funcional, no concertista. Esa honestidad me ha liberado 
+              para enfocarme en lo que más me apasiona: enseñar a tocar y que otros 
+              ejecuten en mis conjuntos.</p>
+            </div>
+            <div class="comp-meta-item gold">
+              <div class="comp-meta-label">🚀 Proyección</div>
+              <p>Disfruto tocar, pero me gusta más enseñar a tocar, y sobre todo, 
+              que otros ejecuten en los ensambles que dirijo.</p>
+            </div>
+          </div>
+        </div>
+        <div class="comp-evidencias">
+          <div class="comp-evidencias-label">Evidencias fotográficas</div>
+          <div class="comp-photos">
+            <div class="comp-photo" onclick="openLightbox('assets/img/caleb45.jpg','Ejecución al piano')">
+              <img src="assets/img/caleb45.jpg" alt="Ejecución al piano">
+            </div>
+            <div class="comp-photo" onclick="openLightbox('assets/img/caleb46.jpg','Instrumento de aliento madera')">
+              <img src="assets/img/caleb46.jpg" alt="Instrumento de aliento madera">
+            </div>
+            <div class="comp-photo" onclick="openLightbox('assets/img/caleb47.jpg','Concierto o conjunto')">
+              <img src="assets/img/caleb47.jpg" alt="Concierto o conjunto">
+            </div>
+          </div>
+          <div class="comp-photo-desc">
+            <p>Espacio para describir el contexto de cada evidencia: repertorio interpretado, 
+            evento, fecha e institución.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── COMPETENCIA IV: ARREGLOS ── -->
+    <div id="arreglos" class="comp-block reveal">
+      <div class="comp-block-header">
+        <div class="comp-block-num">Competencia IV</div>
+        <h2>Arreglar y producir música de calidad aplicando conocimientos teóricos, artísticos y herramientas tecnológicas apropiadas</h2>
+      </div>
+      <div class="comp-block-body">
+        <div class="comp-desc">
+          <p>He desarrollado arreglos para coro y conjuntos de instrumentos, así como 
+          pistas de acompañamiento para diferentes contextos: eclesiástico, educativo y de concierto.</p>
+          <p>El proceso de arreglar música implica entender las voces, los timbres y las 
+          necesidades expresivas de cada ensamble, adaptando el material al nivel y al propósito.</p>
+          <div class="comp-meta">
+            <div class="comp-meta-item">
+              <div class="comp-meta-label">🔍 Reflexión profesional</div>
+              <p>No soy el más tecnológico, pero disfruto hacer arreglos y orquestación. 
+              Esa honestidad me impulsa a seguir creciendo en el uso de herramientas digitales 
+              para la producción musical.</p>
+            </div>
+            <div class="comp-meta-item gold">
+              <div class="comp-meta-label">🚀 Proyección</div>
+              <p>Estoy dispuesto a utilizar estas habilidades al servicio de mis conjuntos 
+              musicales y continuar desarrollando competencias tecnológicas aplicadas.</p>
+            </div>
+          </div>
+        </div>
+        <div class="comp-evidencias">
+          <div class="comp-evidencias-label">Evidencias fotográficas</div>
+          <div class="comp-photos">
+            <div class="comp-photo" onclick="openLightbox('assets/img/caleb48.jpg','Arreglo para coro')">
+              <img src="assets/img/caleb48.jpg" alt="Arreglo para coro">
+            </div>
+            <div class="comp-photo" onclick="openLightbox('assets/img/caleb49.jpg','Partitura o conjunto')">
+              <img src="assets/img/caleb49.jpg" alt="Partitura o conjunto">
+            </div>
+            <div class="comp-photo" onclick="openLightbox('assets/img/caleb50.jpg','Producción musical')">
+              <img src="assets/img/caleb50.jpg" alt="Producción musical">
+            </div>
+          </div>
+          <div class="comp-photo-desc">
+            <p>Espacio para describir el contexto de cada evidencia: tipo de arreglo, 
+            ensamble destino, programa o evento donde se utilizó.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── COMPETENCIA V: LIDERAZGO ── -->
+    <div id="liderazgo" class="comp-block reveal">
+      <div class="comp-block-header">
+        <div class="comp-block-num">Competencia V</div>
+        <h2>Liderar la actividad musical escolar y eclesiástica utilizando teorías y procesos administrativos en forma colaborativa y ética</h2>
+      </div>
+      <div class="comp-block-body">
+        <div class="comp-desc">
+          <p>Me encanta la gestión musical. He liderado ensambles y conjuntos, dirigido y creado 
+          varios coros, y me apasiona la creación de proyectos con impacto institucional y comunitario.</p>
+          <p>He aprendido que un departamento de música con visión, legado y estructura trasciende 
+          la persona y construye identidad institucional duradera.</p>
+          <div class="comp-meta">
+            <div class="comp-meta-item">
+              <div class="comp-meta-label">🔍 Reflexión profesional</div>
+              <p>Aprendí que muchas escuelas no tienen un departamento de música, sino un maestro 
+              de música. Cuando todo depende del entusiasmo de una sola persona, el proyecto es 
+              frágil. La visión debe construir estructura, no solo entusiasmo.</p>
+            </div>
+            <div class="comp-meta-item gold">
+              <div class="comp-meta-label">🚀 Proyección</div>
+              <p>Esta es el área donde me gustaría especializarme a nivel de posgrado: 
+              gestión y administración de programas musicales en instituciones educativas.</p>
+            </div>
+          </div>
+        </div>
+        <div class="comp-evidencias">
+          <div class="comp-evidencias-label">Evidencias fotográficas</div>
+          <div class="comp-photos">
+            <div class="comp-photo" onclick="openLightbox('assets/img/caleb51.jpg','Dirección coral')">
+              <img src="assets/img/caleb51.jpg" alt="Dirección coral">
+            </div>
+            <div class="comp-photo" onclick="openLightbox('assets/img/caleb52.jpg','Ensayo de ensamble')">
+              <img src="assets/img/caleb52.jpg" alt="Ensayo de ensamble">
+            </div>
+            <div class="comp-photo" onclick="openLightbox('assets/img/caleb53.jpg','Gestión de proyecto musical')">
+              <img src="assets/img/caleb53.jpg" alt="Gestión de proyecto musical">
+            </div>
+          </div>
+          <div class="comp-photo-desc">
+            <p>Espacio para describir el contexto de cada evidencia: coro o ensamble, 
+            institución, fechas y logros alcanzados.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── COMPETENCIA VI: INVESTIGACIÓN ── -->
+    <div id="investigacion" class="comp-block reveal">
+      <div class="comp-block-header">
+        <div class="comp-block-num">Competencia VI</div>
+        <h2>Generar aportes significativos a través de proyectos de investigación aplicados a la profesión</h2>
+      </div>
+      <div class="comp-block-body">
+        <div class="comp-desc">
+          <p>Desarrollé una investigación cualitativa titulada: <strong>"Desarrollo de la musicalidad 
+          desde la cotidianidad. Una perspectiva novedosa en la voz del músico en formación."</strong></p>
+          <p>El proceso implicó identificar un problema real, plantear preguntas de investigación, 
+          recopilar datos mediante entrevistas y análisis, y comunicar los hallazgos de forma 
+          oral y escrita con rigor académico.</p>
+          <div class="comp-meta">
+            <div class="comp-meta-item">
+              <div class="comp-meta-label">🔍 Reflexión profesional</div>
+              <p>Fue un proceso increíble que me permitió comprender la investigación como una 
+              forma de servir a la comunidad educativa. Aprendí a ver la realidad del aula 
+              con ojos más críticos y propositivos.</p>
+            </div>
+            <div class="comp-meta-item gold">
+              <div class="comp-meta-label">🚀 Proyección</div>
+              <p>Deseo publicar esta investigación en un futuro cercano para que aporte 
+              al campo de la educación musical en contextos latinoamericanos.</p>
+            </div>
+          </div>
+        </div>
+        <div class="comp-evidencias">
+          <div class="comp-evidencias-label">Evidencias fotográficas y documento</div>
+          <div class="comp-photos">
+            <div class="comp-photo" onclick="openLightbox('assets/img/caleb54.jpg','Investigación cualitativa')">
+              <img src="assets/img/caleb54.jpg" alt="Investigación cualitativa">
+            </div>
+            <div class="comp-photo" onclick="openLightbox('assets/img/caleb55.jpg','Presentación de investigación')">
+              <img src="assets/img/caleb55.jpg" alt="Presentación de investigación">
+            </div>
+            <div class="comp-photo" onclick="openLightbox('assets/img/caleb56.jpg','Proceso de investigación')">
+              <img src="assets/img/caleb56.jpg" alt="Proceso de investigación">
+            </div>
+          </div>
+          <!-- Archivo de investigación -->
+          <div class="file-area">
+            <div class="file-area-icon">📄</div>
+            <p>Documento completo de investigación</p>
+            <a href="#" class="btn-primary" style="padding:9px 22px;font-size:0.85rem;">
+              <i class="fas fa-download"></i> Ver / descargar investigación
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     BLOQUE C: INTEGRACIÓN
+══════════════════════════════ -->
+<section id="integracion" class="section bg-light">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div class="block-divider reveal">
+      <div class="block-divider-badge badge-sage">🤝 &nbsp;Competencias de Integración</div>
+      <div class="block-divider-line"></div>
+    </div>
+
+    <div class="comp-block reveal">
+      <div class="comp-block-header">
+        <div class="comp-block-num">Competencia VII</div>
+        <h2>Concretar proyectos emprendedores de servicio con visión misionera en distintos contextos para promover el bienestar integral</h2>
+      </div>
+      <div class="comp-block-body">
+        <div class="comp-desc">
+          <p>Esta competencia integra todas las anteriores en contextos reales de servicio: 
+          educativos, eclesiásticos y comunitarios, con una visión que trasciende el aula 
+          y se conecta con la misión.</p>
+          <div class="integ-chips" style="margin-top:20px;">
+            <div class="integ-chip">🌐 <span>Comunicación en inglés (B2)</span></div>
+            <div class="integ-chip">🤝 <span>Colaboración con ONG</span></div>
+            <div class="integ-chip">💡 <span>Autofinanciamiento de proyectos</span></div>
+            <div class="integ-chip">🌱 <span>Sustentabilidad</span></div>
+            <div class="integ-chip">👥 <span>Diversidad y multiculturalidad</span></div>
+            <div class="integ-chip">💛 <span>Servicio abnegado</span></div>
+            <div class="integ-chip">🎨 <span>Arte musical de calidad</span></div>
+            <div class="integ-chip">🌍 <span>Alcance local y mundial</span></div>
+          </div>
+          <div class="comp-meta" style="margin-top:20px;">
+            <div class="comp-meta-item sage" style="border-left-color:var(--sage);background:rgba(146,140,111,0.06);">
+              <div class="comp-meta-label" style="color:var(--sage);">🔍 Reflexión y proyección</div>
+              <p>Cada residencia —pedagógica, eclesiástica y comunitaria— fue un ejercicio de 
+              integración donde confluyen la música, el liderazgo, la fe y el servicio. 
+              La meta no es ser un músico que sirve, sino un servidor que usa la música como medio.</p>
+            </div>
+          </div>
+        </div>
+        <div class="comp-evidencias">
+          <div class="comp-evidencias-label">Evidencia fotográfica</div>
+          <div style="margin-bottom:14px;">
+            <div class="integ-photo">
+              <img src="assets/img/caleb57.jpg" alt="Proyecto de integración comunitaria">
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div class="comp-photo" style="aspect-ratio:4/3;" onclick="openLightbox('assets/img/caleb58.jpg','Proyecto de servicio comunitario')">
+              <img src="assets/img/caleb58.jpg" alt="Proyecto de servicio comunitario" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-sm);">
+            </div>
+            <div class="comp-photo" style="aspect-ratio:4/3;" onclick="openLightbox('assets/img/caleb59.jpg','Trabajo colaborativo con ONG')">
+              <img src="assets/img/caleb59.jpg" alt="Trabajo colaborativo con ONG" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-sm);">
+            </div>
+          </div>
+          <div class="comp-photo-desc" style="margin-top:12px;">
+            <p>Espacio para describir el contexto de cada evidencia de integración: 
+            proyecto, organización, comunidad beneficiada e impacto.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navegación -->
+    <div class="sec-nav reveal">
+      <a href="identidad.html" class="sec-nav-link">
+        <i class="fas fa-arrow-left"></i> Identidad profesional
+      </a>
+      <div style="text-align:center;">
+        <p style="font-size:0.75rem;color:var(--sage);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">Siguiente sección</p>
+        <a href="practicas.html" class="btn-primary">Prácticas profesionales <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer id="footer">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="footer-inner">
+      <div class="footer-logo">Caleb<span>.</span></div>
+      <nav class="footer-nav">
+        <a href="index.html">Inicio</a>
+        <a href="identidad.html">Identidad</a>
+        <a href="competencias.html">Competencias</a>
+        <a href="practicas.html">Prácticas</a>
+        <a href="trayectoria.html">Trayectoria</a>
+        <a href="galeria.html">Galería</a>
+      </nav>
+      <div class="footer-soc">
+        <a href="https://instagram.com/truji.lloc" target="_blank" class="fsoc"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="fsoc"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="fsoc"><i class="fab fa-linkedin"></i></a>
+        <a href="https://wa.me/526651206970" target="_blank" class="fsoc"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Caleb Josué Trujillo · Portafolio Profesional · Licenciatura en Música, Enseñanza Musical · Universidad de Montemorelos
+    </div>
+  </div>
+</footer>
+
+<!-- ══ LIGHTBOX ══ -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+</div>
+
+<script>
+  // Navbar
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
+
+  // Menú móvil
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
+    burger.classList.remove('open');
+    navLinks.classList.remove('open');
+  }));
+
+  // Reveal
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); }});
+  }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+    else ro.observe(el);
+  });
+
+  // Lightbox
+  function openLightbox(src, caption) {
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightboxCaption').textContent = caption;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+  // Pills activos en scroll
+  const sections = document.querySelectorAll('section[id]');
+  const pills = document.querySelectorAll('.comp-pill');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    pills.forEach(p => {
+      p.classList.remove('active');
+      if (p.getAttribute('href') === '#' + current) p.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
