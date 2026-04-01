@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galería | Caleb Josué Trujillo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+/* ══ RESET + VARIABLES ══ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#3066BE;--blue-dk:#1D4A9E;--gold:#CBA135;--sage:#928C6F;
+  --bg:#E8E9F3;--bg-light:#F5F5F5;--text:#1A1A1A;--white:#FFFFFF;
+  --dark:#101521;
+  --shadow-sm:0 2px 12px rgba(48,102,190,0.07);
+  --shadow-md:0 8px 32px rgba(48,102,190,0.12);
+  --shadow-lg:0 16px 48px rgba(48,102,190,0.16);
+  --radius-sm:12px;--radius-md:20px;--radius-lg:28px;
+  --transition:0.25s ease;--container-pad:6vw;
+}
+html{scroll-behavior:smooth}
+body{font-family:"Figtree",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+
+/* ══ NAVBAR ══ */
+#navbar{position:fixed;inset:0 0 auto 0;width:100%;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px var(--container-pad);background:rgba(232,233,243,0.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(48,102,190,0.1);transition:box-shadow var(--transition)}
+#navbar.scrolled{box-shadow:0 4px 32px rgba(48,102,190,0.1)}
+.nav-logo{font-family:"Poppins",sans-serif;font-weight:700;font-size:1.2rem;color:var(--blue);flex-shrink:0}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{position:relative;font-weight:500;font-size:0.88rem;color:var(--text);transition:color 0.2s;padding-bottom:2px}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);transition:width 0.25s ease}
+.nav-links a:hover::after,.nav-links a.nav-active::after{width:100%}
+.nav-links a.nav-active{color:var(--blue);font-weight:600}
+.nav-links a:hover{color:var(--blue)}
+.nav-cta{display:inline-flex;align-items:center;background:var(--blue);color:var(--white);padding:9px 22px;border-radius:999px;font-size:0.88rem;font-weight:500;transition:background var(--transition),transform var(--transition);flex-shrink:0}
+.nav-cta:hover{background:var(--gold);transform:translateY(-1px)}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.nav-burger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s ease}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-links.open{display:flex;flex-direction:column;align-items:flex-start;gap:1.4rem;position:fixed;top:72px;left:0;width:100%;padding:24px var(--container-pad) 32px;background:rgba(232,233,243,0.98);backdrop-filter:blur(14px);border-bottom:1px solid rgba(48,102,190,0.1);box-shadow:0 8px 32px rgba(48,102,190,0.08);z-index:999}
+.nav-links.open a.nav-active{border-left:3px solid var(--gold);padding-left:12px}
+
+/* ══ BOTONES ══ */
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;cursor:pointer;background:var(--blue);color:var(--white);padding:13px 30px;border:none;font-size:0.95rem;font-weight:500;box-shadow:0 6px 24px rgba(48,102,190,0.25);transition:all var(--transition)}
+.btn-primary:hover{background:var(--blue-dk);transform:translateY(-2px);box-shadow:0 10px 32px rgba(48,102,190,0.35)}
+.btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;cursor:pointer;background:transparent;color:var(--text);padding:12px 28px;border:1.5px solid var(--sage);font-size:0.95rem;font-weight:500;transition:all var(--transition)}
+.btn-secondary:hover{color:var(--blue);border-color:var(--blue);transform:translateY(-2px)}
+
+/* ══ REVEAL ══ */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ══ PAGE HERO ══ */
+.page-hero{padding:140px var(--container-pad) 72px;background:var(--bg);position:relative;overflow:hidden}
+.page-hero::before{content:"";position:absolute;right:-80px;top:-80px;width:500px;height:500px;background:linear-gradient(135deg,rgba(48,102,190,0.07),rgba(203,161,53,0.05));border-radius:50%;pointer-events:none}
+.breadcrumb{display:inline-flex;align-items:center;gap:8px;font-size:0.78rem;color:var(--sage);margin-bottom:20px}
+.breadcrumb a:hover{color:var(--blue)}
+.breadcrumb span{color:var(--gold)}
+.page-hero-tag{display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;padding:6px 16px;background:rgba(48,102,190,0.08);border:1px solid rgba(48,102,190,0.18);border-radius:999px;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue)}
+.page-hero-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.page-hero h1{font-family:"Poppins",sans-serif;font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:700;line-height:1.1;margin-bottom:16px}
+.page-hero h1 span{color:var(--blue)}
+.page-hero-desc{max-width:600px;font-size:1rem;line-height:1.85;color:#555}
+
+/* ══ FILTROS ══ */
+.filters-bar{position:sticky;top:72px;z-index:100;background:rgba(232,233,243,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(48,102,190,0.08);padding:16px var(--container-pad)}
+.filters-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.filter-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:999px;font-size:0.82rem;font-weight:600;cursor:pointer;border:1.5px solid rgba(48,102,190,0.15);background:var(--white);color:var(--text);transition:all var(--transition);white-space:nowrap}
+.filter-btn:hover{border-color:var(--blue);color:var(--blue)}
+.filter-btn.active{background:var(--blue);color:var(--white);border-color:var(--blue)}
+.filter-btn .filter-count{background:rgba(255,255,255,0.25);border-radius:999px;padding:1px 7px;font-size:0.7rem;font-weight:700}
+.filter-btn:not(.active) .filter-count{background:rgba(48,102,190,0.08);color:var(--sage)}
+.filters-total{margin-left:auto;font-size:0.8rem;color:var(--sage);white-space:nowrap}
+
+/* ══ GALERÍA GRID ══ */
+.gallery-section{padding:48px var(--container-pad) 80px}
+.gallery-grid{max-width:1200px;margin:0 auto;columns:3;column-gap:16px}
+.gallery-item{break-inside:avoid;margin-bottom:16px;border-radius:var(--radius-md);overflow:hidden;cursor:pointer;position:relative;background:var(--white);box-shadow:var(--shadow-sm);transition:transform var(--transition),box-shadow var(--transition)}
+.gallery-item:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.gallery-item.hidden{display:none}
+.gallery-img{width:100%;display:block;border-radius:var(--radius-md) var(--radius-md) 0 0;transition:transform 0.4s ease}
+.gallery-item:hover .gallery-img{transform:scale(1.03)}
+.gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(16,21,33,0.82) 0%,transparent 55%);opacity:0;transition:opacity var(--transition);border-radius:var(--radius-md);display:flex;align-items:flex-end;padding:18px}
+.gallery-item:hover .gallery-overlay{opacity:1}
+.gallery-overlay-content{color:var(--white)}
+.gallery-overlay-content h4{font-family:"Poppins",sans-serif;font-size:0.9rem;font-weight:700;margin-bottom:3px}
+.gallery-overlay-content p{font-size:0.78rem;color:rgba(255,255,255,0.72);line-height:1.5}
+.gallery-caption{padding:12px 14px 14px}
+.gallery-caption-cat{display:inline-flex;align-items:center;gap:5px;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:3px 10px;border-radius:999px;margin-bottom:6px}
+.cat-pedagogica{background:rgba(48,102,190,0.1);color:var(--blue)}
+.cat-eclesiastica{background:rgba(203,161,53,0.12);color:var(--gold)}
+.cat-comunitaria{background:rgba(146,140,111,0.12);color:var(--sage)}
+.cat-coros{background:rgba(48,102,190,0.08);color:var(--blue-dk)}
+.cat-mision{background:rgba(16,21,33,0.07);color:#444}
+.cat-personal{background:rgba(203,161,53,0.08);color:#7a6020}
+.gallery-caption h4{font-family:"Poppins",sans-serif;font-size:0.88rem;font-weight:700;color:var(--text);margin-bottom:2px}
+.gallery-caption p{font-size:0.78rem;color:#888;line-height:1.5}
+
+/* Sin resultados */
+.no-results{display:none;text-align:center;padding:64px 20px;color:var(--sage)}
+.no-results.visible{display:block}
+.no-results p{font-size:1rem;margin-top:12px}
+
+/* ══ LIGHTBOX ══ */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(10,14,26,0.96);z-index:2000;align-items:center;justify-content:center;flex-direction:column;padding:20px}
+.lightbox.open{display:flex}
+.lb-img-wrap{position:relative;max-width:min(90vw,900px);max-height:78vh}
+.lb-img{width:100%;max-height:78vh;object-fit:contain;border-radius:var(--radius-md);display:block}
+.lb-close{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.12);color:var(--white);font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background var(--transition);border:none}
+.lb-close:hover{background:rgba(255,255,255,0.22)}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.1);color:var(--white);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background var(--transition);border:none;font-size:1rem}
+.lb-nav:hover{background:rgba(255,255,255,0.2)}
+.lb-prev{left:-56px}
+.lb-next{right:-56px}
+.lb-footer{margin-top:16px;text-align:center;max-width:600px}
+.lb-title{font-family:"Poppins",sans-serif;font-size:1rem;font-weight:700;color:var(--white);margin-bottom:4px}
+.lb-desc{font-size:0.83rem;color:rgba(255,255,255,0.6);line-height:1.6}
+.lb-counter{margin-top:10px;font-size:0.75rem;color:rgba(255,255,255,0.35)}
+.lb-cat{display:inline-flex;align-items:center;gap:5px;padding:3px 12px;border-radius:999px;font-size:0.72rem;font-weight:700;background:rgba(255,255,255,0.1);color:rgba(255,255,255,0.7);margin-bottom:8px}
+
+/* ══ NAV SECCIONES ══ */
+.sec-nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;padding:40px var(--container-pad);border-top:1px solid rgba(48,102,190,0.1);max-width:1200px;margin:0 auto}
+.sec-nav-link{display:inline-flex;align-items:center;gap:8px;font-size:0.88rem;font-weight:600;color:var(--blue);transition:gap var(--transition)}
+.sec-nav-link:hover{gap:12px}
+
+/* ══ FOOTER ══ */
+#footer{background:var(--dark);color:rgba(255,255,255,0.84);padding:42px var(--container-pad) 18px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.footer-logo{font-family:"Poppins",sans-serif;font-size:1.2rem;font-weight:700;color:var(--white)}
+.footer-logo span{color:var(--gold)}
+.footer-nav{display:flex;flex-wrap:wrap;gap:18px}
+.footer-nav a{font-size:0.88rem;color:rgba(255,255,255,0.76);transition:color var(--transition)}
+.footer-nav a:hover{color:var(--gold)}
+.footer-soc{display:flex;gap:10px}
+.fsoc{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.08);transition:background var(--transition),transform var(--transition)}
+.fsoc:hover{background:rgba(255,255,255,0.16);transform:translateY(-2px)}
+.footer-bottom{margin-top:24px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.1);text-align:center;font-size:0.82rem;color:rgba(255,255,255,0.58)}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:900px){
+  #navbar{padding:16px var(--container-pad)}
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+  .nav-cta{display:none}
+  .gallery-grid{columns:2}
+  .lb-prev{left:-44px}.lb-next{right:-44px}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:600px){
+  .gallery-grid{columns:1}
+  .lb-prev,.lb-next{display:none}
+  .sec-nav{flex-direction:column;align-items:flex-start}
+  .filters-inner{gap:8px}
+}
+  </style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Caleb<span>.</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="identidad.html">Identidad</a></li>
+    <li><a href="competencias.html">Competencias</a></li>
+    <li><a href="practicas.html">Prácticas</a></li>
+    <li><a href="trayectoria.html">Trayectoria</a></li>
+    <li><a href="galeria.html" class="nav-active">Galería</a></li>
+  </ul>
+  <a href="index.html#contacto" class="nav-cta">Contáctame</a>
+  <button class="nav-burger" id="burger" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══ PAGE HERO ══ -->
+<header class="page-hero">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="breadcrumb reveal">
+      <a href="index.html">Inicio</a>
+      <span>/</span>
+      <span>Sección 5</span>
+    </div>
+    <div class="page-hero-tag reveal">Sección 5 de 5</div>
+    <h1 class="reveal">Galería de <span>evidencias</span></h1>
+    <p class="page-hero-desc reveal">
+      Un recorrido visual por los contextos, proyectos y comunidades donde he servido 
+      a través de la música. Cada foto documenta una competencia, un momento 
+      de formación o un impacto real.
+    </p>
+  </div>
+</header>
+
+<!-- ══ FILTROS ══ -->
+<div class="filters-bar">
+  <div class="filters-inner">
+    <button class="filter-btn active" data-filter="all">
+      Todos <span class="filter-count" id="count-all">24</span>
+    </button>
+    <button class="filter-btn" data-filter="pedagogica">
+      🏫 Pedagógica <span class="filter-count" id="count-pedagogica"></span>
+    </button>
+    <button class="filter-btn" data-filter="eclesiastica">
+      ⛪ Eclesiástica <span class="filter-count" id="count-eclesiastica"></span>
+    </button>
+    <button class="filter-btn" data-filter="comunitaria">
+      🌍 Comunitaria <span class="filter-count" id="count-comunitaria"></span>
+    </button>
+    <button class="filter-btn" data-filter="coros">
+      🎼 Coros <span class="filter-count" id="count-coros"></span>
+    </button>
+    <button class="filter-btn" data-filter="mision">
+      ✈️ Misión <span class="filter-count" id="count-mision"></span>
+    </button>
+    <button class="filter-btn" data-filter="personal">
+      🎹 Personal <span class="filter-count" id="count-personal"></span>
+    </button>
+    <span class="filters-total" id="filters-total">24 fotos</span>
+  </div>
+</div>
+
+<!-- ══ GALERÍA ══ -->
+<div class="gallery-section">
+  <div class="gallery-grid" id="galleryGrid">
+
+    <!-- ── PEDAGÓGICA ── -->
+    <div class="gallery-item" data-cat="pedagogica" data-title="Festival Navideño — Isaías" data-desc="Producción artística temática del Festival Navideño con temática del libro de Isaías. Colegio Obregón, 2023.">
+      <img class="gallery-img" src="assets/img/caleb60.jpg" alt="Festival Navideño Isaías" style="aspect-ratio:16/9;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Festival Navideño — Isaías</h4><p>Colegio Obregón · 2023</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-pedagogica">🏫 Pedagógica</span>
+        <h4>Festival Navideño — Isaías</h4>
+        <p>Colegio Obregón · 2023</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="pedagogica" data-title="Coros del Colegio" data-desc="Dirección de los cuatro coros del Colegio Obregón durante la residencia pedagógica 2023–2024.">
+      <img class="gallery-img" src="assets/img/caleb61.jpg" alt="Coros del Colegio" style="aspect-ratio:4/3;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Coros del Colegio</h4><p>Colegio Obregón · 2023–2024</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-pedagogica">🏫 Pedagógica</span>
+        <h4>Coros del Colegio</h4>
+        <p>Dirección coral · Colegio Obregón</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="pedagogica" data-title="Banda Escolar" data-desc="Dirección de la banda escolar del Colegio Obregón durante la residencia pedagógica.">
+      <img class="gallery-img" src="assets/img/caleb62.jpg" alt="Banda Escolar" style="aspect-ratio:4/3;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Banda Escolar</h4><p>Colegio Obregón · 2023–2024</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-pedagogica">🏫 Pedagógica</span>
+        <h4>Banda Escolar</h4>
+        <p>Dirección de banda · Colegio Obregón</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="pedagogica" data-title="Clase de Música" data-desc="Clase de solfeo y teoría musical en el Colegio Obregón. Estrategia de los perritos con niños de primaria.">
+      <img class="gallery-img" src="assets/img/caleb63.jpg" alt="Clase de Música" style="aspect-ratio:1;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Clase de Música</h4><p>Solfeo y teoría · Primaria</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-pedagogica">🏫 Pedagógica</span>
+        <h4>Clase de Música</h4>
+        <p>Solfeo y teoría · Primaria</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="pedagogica" data-title="Enseñanza de Piano" data-desc="Clase particular de piano con estudiante de iniciación musical. Metodología adaptada al nivel y personalidad del alumno.">
+      <img class="gallery-img" src="assets/img/caleb74.jpg" alt="Enseñanza de Piano" style="aspect-ratio:4/3;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Enseñanza de Piano</h4><p>Clases particulares · 2021–Presente</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-pedagogica">🏫 Pedagógica</span>
+        <h4>Enseñanza de Piano</h4>
+        <p>Clases particulares · 2021–Presente</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="pedagogica" data-title="Taller Contemporáneo" data-desc="Taller de música cristiana contemporánea en el Colegio Obregón. Formación de jóvenes músicos para el servicio eclesiástico.">
+      <img class="gallery-img" src="assets/img/caleb75.jpg" alt="Taller Contemporáneo" style="aspect-ratio:16/9;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Taller Contemporáneo</h4><p>Música cristiana · Colegio Obregón</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-pedagogica">🏫 Pedagógica</span>
+        <h4>Taller Contemporáneo</h4>
+        <p>Música cristiana · Colegio Obregón</p>
+      </div>
+    </div>
+
+    <!-- ── ECLESIÁSTICA ── -->
+    <div class="gallery-item" data-cat="eclesiastica" data-title="Proyecto Barca" data-desc="Niños del Proyecto Barca en el Distrito Constitución, Obregón. Espacio integral de música, creatividad y enseñanza bíblica.">
+      <img class="gallery-img" src="assets/img/caleb64.jpg" alt="Proyecto Barca" style="aspect-ratio:4/3;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Proyecto Barca</h4><p>Distrito Constitución · Obregón</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-eclesiastica">⛪ Eclesiástica</span>
+        <h4>Proyecto Barca</h4>
+        <p>Distrito Constitución · Obregón, Sonora</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="eclesiastica" data-title="Taller Coral Barca" data-desc="Ensayo del taller coral del Proyecto Barca. Práctica semanal los viernes preparando el repertorio para la Cantata del Arca.">
+      <img class="gallery-img" src="assets/img/caleb65.jpg" alt="Taller Coral Barca" style="aspect-ratio:1;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Taller Coral Barca</h4><p>Ensayo semanal · Viernes</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-eclesiastica">⛪ Eclesiástica</span>
+        <h4>Taller Coral Barca</h4>
+        <p>Ensayo semanal · Viernes 6:30 pm</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="eclesiastica" data-title="Actividades con Niños" data-desc="Estaciones de actividades del Proyecto Barca: manualidades, historia bíblica y juego guiado para niños de la comunidad.">
+      <img class="gallery-img" src="assets/img/caleb66.jpg" alt="Actividades con Niños" style="aspect-ratio:4/3;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Actividades con Niños</h4><p>Estaciones · Proyecto Barca</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-eclesiastica">⛪ Eclesiástica</span>
+        <h4>Actividades con Niños</h4>
+        <p>Estaciones creativas · Proyecto Barca</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="eclesiastica" data-title="Cantata del Arca de Noé" data-desc="Evento final del Proyecto Barca: la Cantata del Arca de Noé, presentación comunitaria con niños, padres y colaboradores.">
+      <img class="gallery-img" src="assets/img/caleb67.jpg" alt="Cantata del Arca de Noé" style="aspect-ratio:16/9;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Cantata del Arca de Noé</h4><p>Evento final · Proyecto Barca</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-eclesiastica">⛪ Eclesiástica</span>
+        <h4>Cantata del Arca de Noé</h4>
+        <p>Evento final comunitario · Proyecto Barca</p>
+      </div>
+    </div>
+
+    <!-- ── COMUNITARIA ── -->
+    <div class="gallery-item" data-cat="comunitaria" data-title="Taller Coral ABBA" data-desc="Sesión del Taller Coral en ABBA Centro de Rehabilitación. Mujeres residentes participando en el ensamble coral.">
+      <img class="gallery-img" src="assets/img/caleb68.jpg" alt="Taller Coral ABBA" style="aspect-ratio:4/3;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Taller Coral ABBA</h4><p>Centro de Rehabilitación · Obregón</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-comunitaria">🌍 Comunitaria</span>
+        <h4>Taller Coral ABBA</h4>
+        <p>Centro de Rehabilitación · Obregón, Sonora</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="comunitaria" data-title="Ensayo Coral ABBA" data-desc="Ensayo de canto coral con las participantes del centro. Dos sesiones semanales de agosto a noviembre 2025.">
+      <img class="gallery-img" src="assets/img/caleb69.jpg" alt="Ensayo Coral ABBA" style="aspect-ratio:1;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Ensayo Coral ABBA</h4><p>Miércoles y viernes · 5:00 pm</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-comunitaria">🌍 Comunitaria</span>
+        <h4>Ensayo Coral ABBA</h4>
+        <p>Miércoles y viernes · 5:00–6:00 pm</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="comunitaria" data-title="Dinámica de Integración" data-desc="Actividad de integración grupal del taller coral. Ejercicios que fortalecen la comunicación y el trabajo en equipo.">
+      <img class="gallery-img" src="assets/img/caleb70.jpg" alt="Dinámica ABBA" style="aspect-ratio:4/3;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Dinámica de Integración</h4><p>Taller Coral ABBA</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-comunitaria">🌍 Comunitaria</span>
+        <h4>Dinámica de Integración</h4>
+        <p>Actividad grupal · Taller Coral ABBA</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="comunitaria" data-title="Presentación Final ABBA" data-desc="Presentación coral de cierre del taller. Las participantes mostraron su progreso musical ante la comunidad del centro.">
+      <img class="gallery-img" src="assets/img/caleb71.jpg" alt="Presentación ABBA" style="aspect-ratio:16/9;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Presentación Final ABBA</h4><p>Cierre del taller · Nov 2025</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-comunitaria">🌍 Comunitaria</span>
+        <h4>Presentación Final ABBA</h4>
+        <p>Cierre del taller · Noviembre 2025</p>
+      </div>
+    </div>
+
+    <!-- ── COROS ── -->
+    <div class="gallery-item" data-cat="coros" data-title="Coro Universitario de Hombres" data-desc="Presentación del Coro Varonil Universitario fundado en la Universidad de Montemorelos. Dirección 2022–2025.">
+      <img class="gallery-img" src="assets/img/caleb76.jpg" alt="Coro Universitario" style="aspect-ratio:16/9;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Coro Universitario de Hombres</h4><p>Universidad de Montemorelos · 2022–2025</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-coros">🎼 Coros</span>
+        <h4>Coro Universitario de Hombres</h4>
+        <p>Fundador y director · UM 2022–2025</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="coros" data-title="Coro Femenino ABBA" data-desc="Fundación y dirección del Coro Femenino ABBA en Obregón, Sonora. Proyecto coral de servicio comunitario 2022–2024.">
+      <img class="gallery-img" src="assets/img/caleb77.jpg" alt="Coro Femenino ABBA" style="aspect-ratio:4/3;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Coro Femenino ABBA</h4><p>Obregón, Sonora · 2022–2024</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-coros">🎼 Coros</span>
+        <h4>Coro Femenino ABBA</h4>
+        <p>Fundadora y directora · Obregón 2022–2024</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="coros" data-title="Coro Kodály — Momentux" data-desc="Dirección del coro Kodály en la Academia Momentux Musicalis, Montemorelos. Metodología Kodály aplicada a coro infantil.">
+      <img class="gallery-img" src="assets/img/caleb78.jpg" alt="Coro Kodály Momentux" style="aspect-ratio:1;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Coro Kodály — Momentux</h4><p>Academia Momentux · 2022–2024</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-coros">🎼 Coros</span>
+        <h4>Coro Kodály — Momentux</h4>
+        <p>Academia Momentux Musicalis · 2022–2024</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="coros" data-title="Dirección Coral" data-desc="Momento de dirección coral en concierto o ensayo formal. Gestión artística y liderazgo del ensamble.">
+      <img class="gallery-img" src="assets/img/caleb79.jpg" alt="Dirección Coral" style="aspect-ratio:4/3;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Dirección Coral</h4><p>Ensamble vocal · Montemorelos</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-coros">🎼 Coros</span>
+        <h4>Dirección Coral</h4>
+        <p>Ensamble vocal · Montemorelos</p>
+      </div>
+    </div>
+
+    <!-- ── MISIÓN ── -->
+    <div class="gallery-item" data-cat="mision" data-title="Misión Internacional" data-desc="Experiencia misional internacional. Proyectos de servicio en Trinidad y Tobago, Egipto y Marruecos.">
+      <img class="gallery-img" src="assets/img/caleb73.jpg" alt="Misión Internacional" style="aspect-ratio:4/3;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Misión Internacional</h4><p>Trinidad · Egipto · Marruecos</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-mision">✈️ Misión</span>
+        <h4>Misión Internacional</h4>
+        <p>Trinidad · Egipto · Marruecos</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="mision" data-title="Texas Conference — Literatura" data-desc="Programa de liderazgo en distribución de literatura adventista. Texas Conference, EUA. 6 programas como líder.">
+      <img class="gallery-img" src="assets/img/caleb80.jpg" alt="Texas Conference" style="aspect-ratio:16/9;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Texas Conference</h4><p>Líder de literatura · EUA</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-mision">✈️ Misión</span>
+        <h4>Texas Conference — Literatura</h4>
+        <p>Líder de 6 programas · EUA</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="mision" data-title="JAM — Alcance Rural" data-desc="Juventud Adventista Misionera. Alcance rural semanal con apoyo médico, educativo y espiritual a comunidades vulnerables.">
+      <img class="gallery-img" src="assets/img/caleb81.jpg" alt="JAM Alcance Rural" style="aspect-ratio:1;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>JAM — Alcance Rural</h4><p>Servicio comunitario semanal</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-mision">✈️ Misión</span>
+        <h4>JAM — Alcance Rural</h4>
+        <p>Servicio médico, educativo y espiritual</p>
+      </div>
+    </div>
+
+    <!-- ── PERSONAL ── -->
+    <div class="gallery-item" data-cat="personal" data-title="Ejecución al Piano" data-desc="Caleb al piano en contexto de concierto o ensayo. Pianista funcional con formación en repertorio clásico y contemporáneo.">
+      <img class="gallery-img" src="assets/img/caleb45.jpg" alt="Ejecución al Piano" style="aspect-ratio:4/3;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Ejecución al Piano</h4><p>Interpretación · Piano</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-personal">🎹 Personal</span>
+        <h4>Ejecución al Piano</h4>
+        <p>Interpretación · Pianista funcional</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="personal" data-title="Instrumento de Viento" data-desc="Caleb con instrumento de aliento madera. Saxofón y clarinete como instrumentos secundarios de su formación musical.">
+      <img class="gallery-img" src="assets/img/caleb46.jpg" alt="Instrumento de Viento" style="aspect-ratio:1;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Instrumento de Viento</h4><p>Saxofón · Clarinete</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-personal">🎹 Personal</span>
+        <h4>Instrumento de Viento</h4>
+        <p>Saxofón · Clarinete · Alientos madera</p>
+      </div>
+    </div>
+
+    <div class="gallery-item" data-cat="personal" data-title="Perfil Profesional" data-desc="Retrato profesional de Caleb Josué Trujillo, músico-educador graduando de la Licenciatura en Música, Enseñanza Musical, Universidad de Montemorelos 2026.">
+      <img class="gallery-img" src="assets/img/caleb72.jpg" alt="Perfil Profesional" style="aspect-ratio:3/4;object-fit:cover;width:100%;">
+      <div class="gallery-overlay"><div class="gallery-overlay-content"><h4>Perfil Profesional</h4><p>Músico-Educador · 2026</p></div></div>
+      <div class="gallery-caption">
+        <span class="gallery-caption-cat cat-personal">🎹 Personal</span>
+        <h4>Perfil Profesional</h4>
+        <p>Músico-Educador · UM 2026</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Sin resultados -->
+  <div class="no-results" id="noResults">
+    <p style="font-size:2rem;">🔍</p>
+    <p>No hay fotos en esta categoría aún.</p>
+  </div>
+
+  <!-- Navegación -->
+  <div class="sec-nav">
+    <a href="trayectoria.html" class="sec-nav-link">
+      <i class="fas fa-arrow-left"></i> Trayectoria y empleabilidad
+    </a>
+    <a href="index.html" class="btn-primary">
+      <i class="fas fa-home"></i> Volver al inicio
+    </a>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer id="footer">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="footer-inner">
+      <div class="footer-logo">Caleb<span>.</span></div>
+      <nav class="footer-nav">
+        <a href="index.html">Inicio</a>
+        <a href="identidad.html">Identidad</a>
+        <a href="competencias.html">Competencias</a>
+        <a href="practicas.html">Prácticas</a>
+        <a href="trayectoria.html">Trayectoria</a>
+        <a href="galeria.html">Galería</a>
+      </nav>
+      <div class="footer-soc">
+        <a href="https://instagram.com/truji.lloc" target="_blank" class="fsoc"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="fsoc"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="fsoc"><i class="fab fa-linkedin"></i></a>
+        <a href="https://wa.me/526651206970" target="_blank" class="fsoc"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Caleb Josué Trujillo · Portafolio Profesional · Licenciatura en Música, Enseñanza Musical · Universidad de Montemorelos
+    </div>
+  </div>
+</footer>
+
+<!-- ══ LIGHTBOX ══ -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-img-wrap">
+    <img class="lb-img" id="lbImg" src="" alt="">
+    <button class="lb-close" id="lbClose"><i class="fas fa-times"></i></button>
+    <button class="lb-nav lb-prev" id="lbPrev"><i class="fas fa-chevron-left"></i></button>
+    <button class="lb-nav lb-next" id="lbNext"><i class="fas fa-chevron-right"></i></button>
+  </div>
+  <div class="lb-footer">
+    <div class="lb-cat" id="lbCat"></div>
+    <div class="lb-title" id="lbTitle"></div>
+    <div class="lb-desc" id="lbDesc"></div>
+    <div class="lb-counter" id="lbCounter"></div>
+  </div>
+</div>
+
+<script>
+  // ── Navbar ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40));
+
+  // ── Menú móvil ──
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
+    burger.classList.remove('open');
+    navLinks.classList.remove('open');
+  }));
+
+  // ── Reveal ──
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); }});
+  }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('visible');
+    else ro.observe(el);
+  });
+
+  // ── Filtros ──
+  const items = Array.from(document.querySelectorAll('.gallery-item'));
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const noResults = document.getElementById('noResults');
+  const totalSpan = document.getElementById('filters-total');
+
+  // Contar por categoría y actualizar badges
+  const cats = ['pedagogica','eclesiastica','comunitaria','coros','mision','personal'];
+  cats.forEach(cat => {
+    const count = items.filter(i => i.dataset.cat === cat).length;
+    const el = document.getElementById('count-' + cat);
+    if (el) el.textContent = count;
+  });
+  document.getElementById('count-all').textContent = items.length;
+  totalSpan.textContent = items.length + ' fotos';
+
+  let currentFilter = 'all';
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentFilter = btn.dataset.filter;
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      let visible = 0;
+      items.forEach(item => {
+        const show = currentFilter === 'all' || item.dataset.cat === currentFilter;
+        item.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+
+      totalSpan.textContent = visible + ' fotos';
+      noResults.classList.toggle('visible', visible === 0);
+    });
+  });
+
+  // ── Lightbox ──
+  let lbIndex = 0;
+  let lbItems = [];
+
+  function getVisibleItems() {
+    return items.filter(i => !i.classList.contains('hidden'));
+  }
+
+  function openLightbox(item) {
+    lbItems = getVisibleItems();
+    lbIndex = lbItems.indexOf(item);
+    showLb();
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function showLb() {
+    const item = lbItems[lbIndex];
+    const img = item.querySelector('.gallery-img');
+    const catEl = item.querySelector('.gallery-caption-cat');
+    document.getElementById('lbImg').src = img.src;
+    document.getElementById('lbTitle').textContent = item.dataset.title || '';
+    document.getElementById('lbDesc').textContent = item.dataset.desc || '';
+    document.getElementById('lbCat').textContent = catEl ? catEl.textContent : '';
+    document.getElementById('lbCounter').textContent = (lbIndex + 1) + ' / ' + lbItems.length;
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  });
+
+  document.getElementById('lbPrev').addEventListener('click', e => {
+    e.stopPropagation();
+    lbIndex = (lbIndex - 1 + lbItems.length) % lbItems.length;
+    showLb();
+  });
+
+  document.getElementById('lbNext').addEventListener('click', e => {
+    e.stopPropagation();
+    lbIndex = (lbIndex + 1) % lbItems.length;
+    showLb();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') { lbIndex = (lbIndex - 1 + lbItems.length) % lbItems.length; showLb(); }
+    if (e.key === 'ArrowRight') { lbIndex = (lbIndex + 1) % lbItems.length; showLb(); }
+  });
+
+  // Abrir lightbox al hacer clic en cualquier item
+  items.forEach(item => {
+    item.addEventListener('click', () => openLightbox(item));
+  });
+</script>
+</body>
+</html>

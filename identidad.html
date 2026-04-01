@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Identidad Profesional | Caleb Josué Trujillo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+/* ══ RESET + VARIABLES ══ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#3066BE;--blue-dk:#1D4A9E;--gold:#CBA135;--sage:#928C6F;
+  --bg:#E8E9F3;--bg-light:#F5F5F5;--text:#1A1A1A;--white:#FFFFFF;
+  --shadow-sm:0 2px 12px rgba(48,102,190,0.07);
+  --shadow-md:0 8px 32px rgba(48,102,190,0.12);
+  --shadow-lg:0 16px 48px rgba(48,102,190,0.16);
+  --radius-sm:12px;--radius-md:20px;--radius-lg:28px;
+  --transition:0.25s ease;--container-pad:6vw;
+}
+html{scroll-behavior:smooth}
+body{font-family:"Figtree",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+
+/* ══ NAVBAR ══ */
+#navbar{position:fixed;inset:0 0 auto 0;width:100%;z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px var(--container-pad);background:rgba(232,233,243,0.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(48,102,190,0.1);transition:box-shadow var(--transition)}
+#navbar.scrolled{box-shadow:0 4px 32px rgba(48,102,190,0.1)}
+.nav-logo{font-family:"Poppins",sans-serif;font-weight:700;font-size:1.2rem;color:var(--blue);flex-shrink:0}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:2rem}
+.nav-links a{position:relative;font-weight:500;font-size:0.88rem;color:var(--text);transition:color 0.2s;padding-bottom:2px}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--gold);transition:width 0.25s ease}
+.nav-links a:hover::after,.nav-links a.nav-active::after{width:100%}
+.nav-links a.nav-active{color:var(--blue);font-weight:600}
+.nav-links a:hover{color:var(--blue)}
+.nav-cta{display:inline-flex;align-items:center;background:var(--blue);color:var(--white);padding:9px 22px;border-radius:999px;font-size:0.88rem;font-weight:500;transition:background var(--transition),transform var(--transition);flex-shrink:0}
+.nav-cta:hover{background:var(--gold);transform:translateY(-1px)}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.nav-burger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s ease}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-burger.open span:nth-child(2){opacity:0}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.nav-links.open{display:flex;flex-direction:column;align-items:flex-start;gap:1.4rem;position:fixed;top:72px;left:0;width:100%;padding:24px var(--container-pad) 32px;background:rgba(232,233,243,0.98);backdrop-filter:blur(14px);border-bottom:1px solid rgba(48,102,190,0.1);box-shadow:0 8px 32px rgba(48,102,190,0.08);z-index:999}
+.nav-links.open a.nav-active{border-left:3px solid var(--gold);padding-left:12px}
+
+/* ══ BUTTONS ══ */
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;cursor:pointer;background:var(--blue);color:var(--white);padding:13px 30px;border:none;font-size:0.95rem;font-weight:500;box-shadow:0 6px 24px rgba(48,102,190,0.25);transition:all var(--transition)}
+.btn-primary:hover{background:var(--blue-dk);transform:translateY(-2px);box-shadow:0 10px 32px rgba(48,102,190,0.35)}
+.btn-secondary{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;cursor:pointer;background:transparent;color:var(--text);padding:12px 28px;border:1.5px solid var(--sage);font-size:0.95rem;font-weight:500;transition:all var(--transition)}
+.btn-secondary:hover{color:var(--blue);border-color:var(--blue);transform:translateY(-2px)}
+
+/* ══ PAGE HERO ══ */
+.page-hero{padding:140px var(--container-pad) 80px;background:var(--bg);position:relative;overflow:hidden}
+.page-hero::before{content:"";position:absolute;right:-80px;top:-80px;width:500px;height:500px;background:linear-gradient(135deg,rgba(48,102,190,0.07),rgba(203,161,53,0.05));border-radius:50%;pointer-events:none}
+.page-hero::after{content:"";position:absolute;left:-60px;bottom:-60px;width:320px;height:320px;background:rgba(203,161,53,0.05);border-radius:50%;pointer-events:none}
+.breadcrumb{display:inline-flex;align-items:center;gap:8px;font-size:0.78rem;color:var(--sage);margin-bottom:20px}
+.breadcrumb a:hover{color:var(--blue)}
+.breadcrumb span{color:var(--gold)}
+.page-hero-tag{display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;padding:6px 16px;background:rgba(48,102,190,0.08);border:1px solid rgba(48,102,190,0.18);border-radius:999px;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--blue)}
+.page-hero-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.page-hero h1{font-family:"Poppins",sans-serif;font-size:clamp(2.2rem,4.5vw,3.5rem);font-weight:700;line-height:1.1;margin-bottom:16px;color:var(--text)}
+.page-hero h1 span{color:var(--blue)}
+.page-hero-desc{max-width:620px;font-size:1rem;line-height:1.85;color:#555}
+
+/* ══ SECTIONS ══ */
+.section{padding:80px var(--container-pad)}
+.bg-light{background:var(--bg-light)}
+.bg-base{background:var(--bg)}
+.section-tag{display:inline-flex;align-items:center;gap:8px;margin-bottom:14px;font-size:0.74rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold)}
+.section-tag::before{content:"";width:28px;height:2px;background:var(--gold);flex-shrink:0}
+.section-title{font-family:"Poppins",sans-serif;font-size:clamp(1.5rem,3vw,2.2rem);font-weight:700;line-height:1.2;margin-bottom:16px;color:var(--text)}
+
+/* ══ REVEAL ══ */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ══ FOTO + TEXTO: layout principal ══ */
+.story-block{display:grid;gap:64px}
+
+/* Bloque par: texto izquierda, foto derecha */
+.story-row{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:56px 0;border-bottom:1px solid rgba(48,102,190,0.08)}
+.story-row:last-child{border-bottom:none}
+.story-row.reverse{direction:rtl}
+.story-row.reverse > *{direction:ltr}
+
+/* Texto */
+.story-text{}
+.story-number{font-family:"Poppins",sans-serif;font-size:4rem;font-weight:700;line-height:1;color:rgba(48,102,190,0.08);margin-bottom:-10px;display:block}
+.story-text h2{font-family:"Poppins",sans-serif;font-size:clamp(1.3rem,2.5vw,1.7rem);font-weight:700;color:var(--text);margin-bottom:16px;line-height:1.25}
+.story-text p{font-size:0.97rem;line-height:1.9;color:#444;margin-bottom:14px}
+.story-text p:last-of-type{margin-bottom:0}
+.story-quote{margin:24px 0;padding:20px 24px;background:rgba(48,102,190,0.05);border-left:4px solid var(--gold);border-radius:0 var(--radius-sm) var(--radius-sm) 0}
+.story-quote p{font-size:0.93rem;font-style:italic;color:#555;line-height:1.8;margin:0}
+.story-quote cite{display:block;margin-top:10px;font-size:0.78rem;font-weight:600;color:var(--sage);font-style:normal}
+
+/* Foto */
+.story-img-wrap{position:relative}
+.story-img{width:100%;border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow-md);aspect-ratio:4/5;background:linear-gradient(135deg,rgba(48,102,190,0.1),rgba(203,161,53,0.08));display:flex;align-items:center;justify-content:center;font-size:5rem}
+.story-img img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg)}
+.story-img-accent{position:absolute;bottom:-16px;right:-16px;width:120px;height:120px;border-radius:var(--radius-md);background:var(--gold);opacity:0.1;z-index:-1}
+.story-img-label{position:absolute;bottom:16px;left:16px;background:rgba(16,21,33,0.75);backdrop-filter:blur(8px);color:var(--white);padding:8px 14px;border-radius:var(--radius-sm);font-size:0.75rem;font-weight:600}
+
+/* Foto horizontal (para bloque de filosofía) */
+.story-img.horizontal{aspect-ratio:16/9}
+
+/* ══ VALORES ══ */
+.valores-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}
+.valor-card{background:var(--white);border-radius:var(--radius-md);padding:24px 20px;box-shadow:var(--shadow-sm);border-top:3px solid transparent;transition:transform var(--transition),box-shadow var(--transition),border-color var(--transition)}
+.valor-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md);border-color:var(--gold)}
+.valor-icon{font-size:1.8rem;margin-bottom:12px}
+.valor-card h3{font-family:"Poppins",sans-serif;font-size:0.95rem;font-weight:700;color:var(--blue);margin-bottom:8px}
+.valor-card p{font-size:0.85rem;color:#666;line-height:1.7}
+
+/* ══ CARTA ══ */
+.carta-section{background:linear-gradient(135deg,var(--blue),var(--blue-dk));border-radius:var(--radius-lg);padding:56px;position:relative;overflow:hidden}
+.carta-section::before{content:'"';position:absolute;top:-20px;left:20px;font-family:"Poppins",sans-serif;font-size:14rem;line-height:1;color:rgba(255,255,255,0.05);font-weight:700;pointer-events:none}
+.carta-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.carta-text{}
+.carta-tag{display:inline-flex;align-items:center;gap:6px;font-size:0.72rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.6);margin-bottom:16px}
+.carta-tag::before{content:"";width:20px;height:1px;background:var(--gold);flex-shrink:0}
+.carta-text h2{font-family:"Poppins",sans-serif;font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:700;color:var(--white);line-height:1.2;margin-bottom:20px}
+.carta-text p{font-size:0.95rem;line-height:1.9;color:rgba(255,255,255,0.82);margin-bottom:14px}
+.carta-text p em{color:var(--gold);font-style:italic}
+.carta-firma{margin-top:20px;font-size:0.82rem;color:rgba(255,255,255,0.55);font-style:italic}
+.carta-img-wrap{position:relative}
+.carta-img{width:100%;border-radius:var(--radius-lg);overflow:hidden;aspect-ratio:4/5;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;font-size:5rem;border:1px solid rgba(255,255,255,0.12)}
+.carta-img img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius-lg)}
+
+/* ══ NAVEGACIÓN SECCIONES ══ */
+.sec-nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-top:64px;padding-top:40px;border-top:1px solid rgba(48,102,190,0.1)}
+.sec-nav-link{display:inline-flex;align-items:center;gap:8px;font-size:0.88rem;font-weight:600;color:var(--blue);transition:gap var(--transition)}
+.sec-nav-link:hover{gap:12px}
+.sec-nav-link.prev{flex-direction:row-reverse}
+
+/* ══ FOOTER ══ */
+#footer{background:#101521;color:rgba(255,255,255,0.84);padding:42px var(--container-pad) 18px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.footer-logo{font-family:"Poppins",sans-serif;font-size:1.2rem;font-weight:700;color:var(--white)}
+.footer-logo span{color:var(--gold)}
+.footer-nav{display:flex;flex-wrap:wrap;gap:18px}
+.footer-nav a{font-size:0.88rem;color:rgba(255,255,255,0.76);transition:color var(--transition)}
+.footer-nav a:hover{color:var(--gold)}
+.footer-soc{display:flex;gap:10px}
+.fsoc{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.08);transition:background var(--transition),transform var(--transition)}
+.fsoc:hover{background:rgba(255,255,255,0.16);transform:translateY(-2px)}
+.footer-bottom{margin-top:24px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.1);text-align:center;font-size:0.82rem;color:rgba(255,255,255,0.58)}
+
+/* ══ ANIMATIONS ══ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══ RESPONSIVE ══ */
+@media(max-width:900px){
+  #navbar{padding:16px var(--container-pad)}
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+  .nav-cta{display:none}
+  .story-row,.story-row.reverse{grid-template-columns:1fr;direction:ltr;gap:36px}
+  .story-row.reverse .story-img-wrap{order:-1}
+  .carta-inner{grid-template-columns:1fr}
+  .valores-grid{grid-template-columns:1fr 1fr}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:640px){
+  .section{padding:64px var(--container-pad)}
+  .page-hero{padding:120px var(--container-pad) 60px}
+  .valores-grid{grid-template-columns:1fr}
+  .carta-section{padding:36px 24px}
+  .sec-nav{flex-direction:column;align-items:flex-start}
+}
+  </style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Caleb<span>.</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Inicio</a></li>
+    <li><a href="identidad.html" class="nav-active">Identidad</a></li>
+    <li><a href="competencias.html">Competencias</a></li>
+    <li><a href="practicas.html">Prácticas</a></li>
+    <li><a href="trayectoria.html">Trayectoria</a></li>
+    <li><a href="galeria.html">Galería</a></li>
+  </ul>
+  <a href="index.html#contacto" class="nav-cta">Contáctame</a>
+  <button class="nav-burger" id="burger" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══ PAGE HERO ══ -->
+<header class="page-hero">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="breadcrumb reveal">
+      <a href="index.html">Inicio</a>
+      <span>/</span>
+      <span>Sección 1</span>
+    </div>
+    <div class="page-hero-tag reveal">Sección 1 de 5</div>
+    <h1 class="reveal">Identidad profesional<br>y <span>propósito</span></h1>
+    <p class="page-hero-desc reveal">
+      Quién soy como músico-educador, desde dónde lo hago y hacia dónde apunto. 
+      Una narrativa personal que integra cosmovisión, filosofía de enseñanza y los valores 
+      que orientan mi práctica artística y pedagógica.
+    </p>
+  </div>
+</header>
+
+<!-- ══ SECCIÓN 1: COSMOVISIÓN ══ -->
+<section class="section bg-light">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div class="story-block">
+
+      <!-- Bloque 1: Origen — foto izquierda, texto derecha -->
+      <div class="story-row reverse reveal">
+        <div class="story-text">
+          <span class="story-number">01</span>
+          <div class="section-tag">Cosmovisión</div>
+          <h2>Una infancia marcada por la música y el amor</h2>
+          <p>
+            Crecí en un hogar que, aunque enfrentaba distintos retos, estuvo marcado por el amor. 
+            Sin embargo, al mirar en retrospectiva desde mi etapa adulta, reconozco que existían 
+            carencias que no eran de tipo económico, sino formativo y emocional, y que requerían 
+            un acompañamiento con mayor impacto.
+          </p>
+          <p>
+            En ese contexto, hoy puedo valorar con mayor claridad la entrega de mi madre, quien 
+            realizó grandes esfuerzos para que yo tuviera acceso a experiencias musicales: 
+            la participación en una banda sinfónica, el canto coral y las clases de piano.
+          </p>
+          <p>
+            Estas vivencias no solo moldearon mi identidad, sino que también fomentaron en mí 
+            la <strong>disciplina, la constancia y la resiliencia</strong>. El impacto fue tan 
+            profundo que, con el tiempo, decidí dedicarme a la educación musical.
+          </p>
+        </div>
+        <div class="story-img-wrap">
+          <div class="story-img">
+            <img src="assets/img/caleb37.jpg" alt="Caleb en sus inicios musicales">
+          </div>
+          <div class="story-img-accent"></div>
+          <div class="story-img-label">🎵 Primeros pasos en la música</div>
+        </div>
+      </div>
+
+      <!-- Bloque 2: Propósito — texto izquierda, foto derecha -->
+      <div class="story-row reveal">
+        <div class="story-text">
+          <span class="story-number">02</span>
+          <div class="section-tag">Propósito</div>
+          <h2>Comprender que el proceso es cíclico</h2>
+          <p>
+            Con el tiempo comprendí que este proceso es cíclico: ahora me corresponde ofrecer 
+            a otros la posibilidad de crecer a través de la música, como alguien lo hizo conmigo.
+          </p>
+          <p>
+            También he aprendido que la música refleja pensamientos, culturas y formas de vida 
+            diversas, lo que me ha sensibilizado ante la realidad de que no todos percibimos 
+            el mundo de la misma manera. Desde esta conciencia, considero un privilegio acercarme 
+            a la subjetividad de otros a través de la música, entendida como una vía legítima 
+            de encuentro y comprensión mutua.
+          </p>
+          <div class="story-quote">
+            <p>"Aspiro a que mis alumnos encuentren en la música un espacio donde puedan ser 
+            ellos mismos y desarrollar las capacidades que poseen, tanto a nivel artístico 
+            como personal."</p>
+            <cite>— Caleb Josué Trujillo</cite>
+          </div>
+        </div>
+        <div class="story-img-wrap">
+          <div class="story-img">
+            <img src="assets/img/caleb38.jpg" alt="Caleb con sus estudiantes">
+          </div>
+          <div class="story-img-accent"></div>
+          <div class="story-img-label">🎓 Propósito pedagógico</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CARTA DE ALUMNA ══ -->
+<section class="section bg-base">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="carta-section reveal">
+      <div class="carta-inner">
+        <div class="carta-text">
+          <div class="carta-tag">Testimonio que confirma el llamado</div>
+          <h2>Una carta que lo resume todo</h2>
+          <p>
+            Hace algunos meses concluí mi etapa docente con una alumna de guitarra que, 
+            al enterarse de mi salida de la ciudad, me entregó una carta que decía:
+          </p>
+          <p>
+            <em>"Profe, quiero decirle que aprecio muchísimo la manera en que me ha acompañado. 
+            Usted ha sido un maestro que trasciende la clase: ha escuchado mis emociones, 
+            ha entendido mis silencios y me ha brindado palabras que me han fortalecido 
+            espiritualmente. Gracias por su paciencia, su guía y por recordarme que 
+            la música también sana."</em>
+          </p>
+          <p>
+            Recibí este mensaje no como un reconocimiento aislado, sino como una confirmación 
+            del sentido de la labor que llevamos los docentes de esta área.
+          </p>
+          <p class="carta-firma">— Alumna de guitarra, Obregón, Sonora</p>
+        </div>
+        <div class="carta-img-wrap">
+          <div class="carta-img">
+            <img src="assets/img/caleb39.jpg" alt="Caleb con alumna de guitarra">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FILOSOFÍA DE ENSEÑANZA ══ -->
+<section class="section bg-light">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <!-- Foto horizontal + texto -->
+    <div class="story-row reveal" style="padding-top:0;">
+      <div class="story-text">
+        <span class="story-number">03</span>
+        <div class="section-tag">Filosofía personal de enseñanza musical</div>
+        <h2>Música con propósito: más que una habilidad artística</h2>
+        <p>
+          Concibo la educación musical como un medio para formar estudiantes capaces de 
+          apreciar, comprender y utilizar la música como una herramienta de expresión 
+          y crecimiento integral.
+        </p>
+        <p>
+          Así como la música refleja una visión del mundo, también puede elegirse de manera 
+          intencional para apoyar objetivos emocionales, sociales y espirituales. Todo aquello 
+          que rodea nuestros sentidos influye en nuestro actuar; por ello, una formación musical 
+          guiada favorece el desarrollo de un carácter que eleve los pensamientos 
+          <em>hacia aquello que es puro, noble y enaltecedor.</em>
+        </p>
+        <p>
+          La experiencia en el aula me ha permitido dimensionar la necesidad de docentes 
+          preparados para enfrentar contextos diversos y retos cambiantes. Esto ha reforzado 
+          mi convicción de mantenerme en <strong>constante formación</strong>, tanto en 
+          el ámbito musical como en el didáctico.
+        </p>
+        <div class="story-quote">
+          <p>"El compromiso con la formación continua es un principio firme en mi desarrollo profesional, 
+          aun reconociendo mis propias áreas de mejora."</p>
+          <cite>— Elena G. de White, adaptado</cite>
+        </div>
+      </div>
+      <div class="story-img-wrap">
+        <div class="story-img">
+          <img src="assets/img/caleb40.jpg" alt="Caleb enseñando en el aula">
+        </div>
+        <div class="story-img-accent"></div>
+        <div class="story-img-label">📖 Filosofía en el aula</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ VALORES ══ -->
+<section class="section bg-base">
+  <div style="max-width:1200px;margin:0 auto;">
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;" class="reveal">
+
+      <!-- Foto lateral -->
+      <div class="story-img-wrap">
+        <div class="story-img" style="aspect-ratio:3/4;">
+          <img src="assets/img/caleb41.jpg" alt="Caleb dirigiendo un ensamble">
+        </div>
+        <div class="story-img-accent"></div>
+        <div class="story-img-label">🎼 Valores en acción</div>
+      </div>
+
+      <!-- Texto + tarjetas de valores -->
+      <div>
+        <span class="story-number">04</span>
+        <div class="section-tag">Valores que orientan la práctica</div>
+        <h2 class="section-title">Principios que trabajo de manera constante</h2>
+        <p style="color:#555;line-height:1.85;font-size:0.97rem;margin-bottom:28px;">
+          Los valores que orientan mi actuar como educador son la entrega y el compromiso 
+          con la causa educativa. He comprobado que, cuando una labor me importa profundamente 
+          como la educación musical, estoy dispuesto a asumir la responsabilidad que implica.
+        </p>
+
+        <div class="valores-grid">
+          <div class="valor-card reveal">
+            <div class="valor-icon">🎯</div>
+            <h3>Entrega y compromiso</h3>
+            <p>Cuando algo me importa de verdad, asumo con plenitud la responsabilidad que implica.</p>
+          </div>
+          <div class="valor-card reveal">
+            <div class="valor-icon">⭐</div>
+            <h3>Búsqueda de excelencia</h3>
+            <p>No como perfeccionismo rígido, sino como actitud constante de dar lo mejor posible.</p>
+          </div>
+          <div class="valor-card reveal">
+            <div class="valor-icon">📐</div>
+            <h3>Orden y método</h3>
+            <p>La estructura en el aula y en los proyectos permite que otros se desarrollen con confianza.</p>
+          </div>
+          <div class="valor-card reveal">
+            <div class="valor-icon">🌱</div>
+            <h3>Resiliencia y sencillez</h3>
+            <p>Levantarme ante los retos sin perder la humildad forma parte de mi identidad profesional.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ NAVEGACIÓN ENTRE SECCIONES ══ -->
+<section class="section bg-light" style="padding-top:0;padding-bottom:64px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="sec-nav reveal">
+      <a href="index.html" class="sec-nav-link prev">
+        <i class="fas fa-arrow-left"></i> Volver al inicio
+      </a>
+      <div style="text-align:center;">
+        <p style="font-size:0.75rem;color:var(--sage);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">Siguiente sección</p>
+        <a href="competencias.html" class="btn-primary">Competencias del perfil de egreso <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer id="footer">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="footer-inner">
+      <div class="footer-logo">Caleb<span>.</span></div>
+      <nav class="footer-nav">
+        <a href="index.html">Inicio</a>
+        <a href="identidad.html">Identidad</a>
+        <a href="competencias.html">Competencias</a>
+        <a href="practicas.html">Prácticas</a>
+        <a href="trayectoria.html">Trayectoria</a>
+        <a href="galeria.html">Galería</a>
+      </nav>
+      <div class="footer-soc">
+        <a href="https://instagram.com/truji.lloc" target="_blank" class="fsoc"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="fsoc"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="fsoc"><i class="fab fa-linkedin"></i></a>
+        <a href="https://wa.me/526651206970" target="_blank" class="fsoc"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Caleb Josué Trujillo · Portafolio Profesional · Licenciatura en Música, Enseñanza Musical · Universidad de Montemorelos
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Menú móvil
+  const burger = document.getElementById('burger');
+  const navLinks = document.getElementById('navLinks');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    navLinks.classList.toggle('open');
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      burger.classList.remove('open');
+      navLinks.classList.remove('open');
+    });
+  });
+
+  // Reveal on scroll
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        revealObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) {
+      el.classList.add('visible');
+    } else {
+      revealObserver.observe(el);
+    }
+  });
+</script>
+</body>
+</html>
