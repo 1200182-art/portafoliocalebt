@@ -121,12 +121,12 @@ ul{list-style:none}
 .res-fotos-label{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--gold);margin-bottom:14px}
 
 /* Grid de 4 fotos: 1 grande arriba, 3 pequeñas abajo */
-.fotos-grid{display:grid;gap:10px}
-.foto-main{width:100%;aspect-ratio:16/9;border-radius:var(--radius-md);overflow:hidden;cursor:pointer;transition:transform var(--transition),box-shadow var(--transition);margin-bottom:10px;}
+.fotos-grid{display:grid;gap:12px}
+.foto-main{width:100%;aspect-ratio:16/9;border-radius:var(--radius-md);overflow:hidden;cursor:pointer;transition:transform var(--transition),box-shadow var(--transition);}
 .foto-main:hover{transform:scale(1.02);box-shadow:var(--shadow-lg)}
 .foto-main img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius-md)}
-.fotos-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:0}
-.foto-thumb{aspect-ratio:4/3;border-radius:var(--radius-sm);overflow:hidden;cursor:pointer;transition:transform var(--transition),box-shadow var(--transition)}
+.fotos-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:0}
+.foto-thumb{aspect-ratio:1;border-radius:var(--radius-sm);overflow:hidden;cursor:pointer;transition:transform var(--transition),box-shadow var(--transition)}
 .foto-thumb:hover{transform:scale(1.04);box-shadow:var(--shadow-md)}
 .foto-thumb img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius-sm)}
 
@@ -319,12 +319,15 @@ ul{list-style:none}
             <div class="foto-main" onclick="openLightbox('assets/img/caleb60.jpg','Festival Navideño — Temática de Isaías')">
               <img src="assets/img/caleb60.jpg" alt="Festival Navideño Isaías">
             </div>
-            <div class="fotos-row" style="grid-template-columns:1fr 1fr;">
+            <div class="fotos-row">
               <div class="foto-thumb" onclick="openLightbox('assets/img/caleb61.jpg','Coros del colegio')">
                 <img src="assets/img/caleb61.jpg" alt="Coros del colegio">
               </div>
               <div class="foto-thumb" onclick="openLightbox('assets/img/caleb62.jpg','Banda escolar')">
                 <img src="assets/img/caleb62.jpg" alt="Banda escolar">
+              </div>
+              <div class="foto-thumb" onclick="openLightbox('assets/img/caleb63.jpg','Clase de música en el aula')">
+                <img src="assets/img/caleb63.jpg" alt="Clase de música en el aula">
               </div>
             </div>
           </div>
@@ -352,10 +355,7 @@ ul{list-style:none}
           a descifrarla. La reconoce. Y cuando llega al instrumento, el maestro puede concentrarse 
           en lo técnico, porque las notas ya están allí como aliadas del proceso.
         </p>
-        <div class="res-quote" style="margin-top:20px;margin-bottom:0;">
-          <p>"No enseñar música solo para tocar mejor, sino enseñar música para vivir mejor y servir mejor."</p>
-          <cite>— Caleb Josué Trujillo, charla ESMUS</cite>
-        </div>
+
       </div>
 
     </div>
@@ -438,12 +438,15 @@ ul{list-style:none}
             <div class="foto-main" onclick="openLightbox('assets/img/caleb64.jpg','Proyecto Barca — niños de la comunidad')">
               <img src="assets/img/caleb64.jpg" alt="Proyecto Barca niños">
             </div>
-            <div class="fotos-row" style="grid-template-columns:1fr 1fr;">
+            <div class="fotos-row">
               <div class="foto-thumb" onclick="openLightbox('assets/img/caleb65.jpg','Taller coral Proyecto Barca')">
                 <img src="assets/img/caleb65.jpg" alt="Taller coral Barca">
               </div>
               <div class="foto-thumb" onclick="openLightbox('assets/img/caleb66.jpg','Actividades con los niños')">
                 <img src="assets/img/caleb66.jpg" alt="Actividades niños">
+              </div>
+              <div class="foto-thumb" onclick="openLightbox('assets/img/caleb67.jpg','Cantata del Arca de Noé')">
+                <img src="assets/img/caleb67.jpg" alt="Cantata Arca de Noé">
               </div>
             </div>
           </div>
@@ -480,11 +483,7 @@ ul{list-style:none}
             <p>Espacios, asistencia, limpieza, orden y montaje para la cantata final.</p>
           </div>
         </div>
-        <div class="res-quote" style="margin-top:24px;margin-bottom:0;">
-          <p>"El Proyecto Barca representa un esfuerzo integral de la iglesia para sembrar esperanza, 
-          valores y el evangelio en la vida de los niños y sus familias."</p>
-          <cite>— Caleb Josué Trujillo, documento oficial del proyecto</cite>
-        </div>
+
       </div>
 
     </div>
@@ -572,12 +571,15 @@ ul{list-style:none}
             <div class="foto-main" onclick="openLightbox('assets/img/caleb68.jpg','Taller Coral ABBA — sesión de canto')">
               <img src="assets/img/caleb68.jpg" alt="Taller Coral ABBA">
             </div>
-            <div class="fotos-row" style="grid-template-columns:1fr 1fr;">
+            <div class="fotos-row">
               <div class="foto-thumb" onclick="openLightbox('assets/img/caleb69.jpg','Ensayo coral semanal')">
                 <img src="assets/img/caleb69.jpg" alt="Ensayo coral ABBA">
               </div>
               <div class="foto-thumb" onclick="openLightbox('assets/img/caleb70.jpg','Actividad de integración')">
                 <img src="assets/img/caleb70.jpg" alt="Actividad ABBA">
+              </div>
+              <div class="foto-thumb" onclick="openLightbox('assets/img/caleb71.jpg','Presentación final del taller')">
+                <img src="assets/img/caleb71.jpg" alt="Presentación ABBA">
               </div>
             </div>
           </div>
