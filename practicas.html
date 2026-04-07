@@ -122,7 +122,7 @@ ul{list-style:none}
 
 /* Grid de 4 fotos: 1 grande arriba, 3 pequeñas abajo */
 .fotos-grid{display:grid;gap:12px}
-.foto-main{width:100%;aspect-ratio:16/9;border-radius:var(--radius-md);overflow:hidden;cursor:pointer;transition:transform var(--transition),box-shadow var(--transition);}
+.foto-main{width:100%;aspect-ratio:4/3;border-radius:var(--radius-md);overflow:hidden;cursor:pointer;transition:transform var(--transition),box-shadow var(--transition);}
 .foto-main:hover{transform:scale(1.02);box-shadow:var(--shadow-lg)}
 .foto-main img{width:100%;height:100%;object-fit:cover;border-radius:var(--radius-md)}
 .fotos-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:0}
@@ -316,7 +316,7 @@ ul{list-style:none}
         <div class="res-fotos">
           <div class="res-fotos-label">Registro fotográfico</div>
           <div class="fotos-grid">
-            <div class="foto-main" onclick="openLightbox('assets/img/caleb60.jpg','Festival Navideño — Temática de Isaías')">
+            <div class="foto-main" style="aspect-ratio:16/9;" onclick="openLightbox('assets/img/caleb60.jpg','Festival Navideño — Temática de Isaías')">
               <img src="assets/img/caleb60.jpg" alt="Festival Navideño Isaías">
             </div>
             <div class="fotos-row">
@@ -428,8 +428,6 @@ ul{list-style:none}
               <span class="res-actividad-icon">🎭</span>
               <span>Cantata del Arca de Noé — evento final comunitario</span>
             </div>
-          </div>
-        </div>
           </div>
         </div>
 
